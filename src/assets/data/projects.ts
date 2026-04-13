@@ -1,0 +1,563 @@
+import type { Project } from '@/types/project';
+
+export const projects: Project[] = [
+  {
+    id: 'p001',
+    title: '新奥海底管道预警系统',
+    category: 'government',
+    type: '海事监控・GIS・视频流・预警平台',
+    role: '前端核心负责人',
+    startDate: '2025-01',
+    endDate: '2025-06',
+    duration: '5个月',
+    techStack: ['Vue3', 'TypeScript', 'OpenLayers', 'SSE', 'ECharts', 'hls.js', 'SRS', 'FFmpeg'],
+    description: '基于GIS的海底管道监控预警系统,实现船舶实时监控、三级预警、电子围栏等功能',
+    objectives: ['实现船舶实时监控', '建立三级预警机制', '部署低延迟视频流', '确保系统稳定运行'],
+    responsibilities: [
+      '负责前端架构设计和技术选型',
+      '实现船舶实时监控和三级预警功能',
+      '部署SRS+FFmpeg视频流服务器',
+      '优化大规模船舶渲染性能',
+      '实现多端告警同步'
+    ],
+    highlights: [
+      '独立实现船舶实时监控、三级预警、电子围栏、VHF 广播',
+      '部署 SRS + FFmpeg,将视频延迟控制在 1s 内',
+      '优化 1000+ 船舶渲染,首屏从 3~5 分钟 → 2~3 秒',
+      '实现多端告警同步,项目正式商用上线'
+    ],
+    technicalHighlights: [
+      '使用SSE实现实时数据推送',
+      '基于OpenLayers实现高性能地图渲染',
+      '使用IndexedDB缓存船舶数据',
+      '优化Canvas绘制性能'
+    ],
+    businessHighlights: [
+      '提升预警响应速度80%',
+      '降低运维成本50%',
+      '系统稳定性达到99.9%'
+    ],
+    challenges: [
+      {
+        problem: '大规模船舶渲染性能问题',
+        solution: '使用虚拟滚动+Canvas渲染+数据分层',
+        result: '首屏加载从3-5分钟优化到2-3秒'
+      },
+      {
+        problem: '视频流延迟过高',
+        solution: '部署SRS+FFmpeg,优化编码参数',
+        result: '视频延迟控制在1秒内'
+      }
+    ],
+    metrics: {
+      performance: '95%↑',
+      codeLines: '15,000+',
+      documents: '10+',
+      commits: '200+',
+      improvement: '首屏加载优化95%'
+    },
+    screenshots: [
+      '/images/projects/p001/map-monitor.jpg',
+      '/images/projects/p001/warning-panel.jpg',
+      '/images/projects/p001/video-monitor.jpg',
+      '/images/projects/p001/vessel-list.jpg'
+    ],
+    detailedDescription: '该项目是一个基于GIS的海底管道监控预警系统,主要功能包括船舶实时监控、三级预警、电子围栏、VHF广播等。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了大规模船舶数据的实时渲染和监控。',
+    architecture: '前后端分离架构,前端使用Vue3+TypeScript+OpenLayers,后端使用FastAPI,视频流使用SRS+FFmpeg',
+    technologies: 'Vue3, TypeScript, OpenLayers, SSE, ECharts, hls.js, SRS, FFmpeg',
+    achievements: '项目正式商用上线,系统稳定运行,预警响应速度提升80%',
+    featured: true,
+    createdAt: '2025-01-01',
+    updatedAt: '2025-06-30',
+    tags: ['GIS', '视频流', '预警系统', '政企项目']
+  },
+  {
+    id: 'p002',
+    title: '舟山大桥综管指挥平台',
+    category: 'government',
+    type: '交通监管・应急指挥・视频监控',
+    role: '前端核心开发',
+    startDate: '2024-03',
+    endDate: '2024-07',
+    duration: '4个月',
+    techStack: ['Vue3', 'TypeScript', 'OpenLayers', 'ECharts', 'Video.js', 'flv.js'],
+    description: '舟山大桥综合管理指挥平台,实现大桥监控、预警管理、应急指挥等功能',
+    objectives: ['实现大桥实时监控', '建立预警管理系统', '开发应急指挥功能', '实现视频监控'],
+    responsibilities: [
+      '负责预警管理模块开发',
+      '开发应急指挥功能',
+      '实现视频监控模块',
+      '开发地图模块',
+      '实现日报系统'
+    ],
+    highlights: [
+      '负责预警管理、应急指挥、视频监控、地图模块、日报系统',
+      '实现多路视频低延迟播放与 Canvas 检测框绘制',
+      '自动生成公文、导出 PDF/PNG/Word、对接钉钉推送',
+      '数据统计效率提升 80%'
+    ],
+    technicalHighlights: [
+      '使用Video.js+flv.js实现低延迟视频播放',
+      'Canvas绘制检测框,性能优化',
+      '对接钉钉API实现消息推送',
+      '自动生成公文文档'
+    ],
+    businessHighlights: [
+      '数据统计效率提升80%',
+      '预警响应时间缩短60%',
+      '办公效率提升50%'
+    ],
+    challenges: [
+      {
+        problem: '多路视频低延迟播放',
+        solution: '使用flv.js协议+Video.js播放器',
+        result: '视频延迟控制在2秒内'
+      },
+      {
+        problem: 'Canvas检测框绘制性能问题',
+        solution: '使用离屏Canvas+requestAnimationFrame优化',
+        result: '绘制性能提升60%'
+      }
+    ],
+    metrics: {
+      performance: '80%↑',
+      codeLines: '12,000+',
+      documents: '8+',
+      commits: '150+',
+      improvement: '数据统计效率提升80%'
+    },
+    screenshots: [
+      '/images/projects/p002/monitor-dashboard.jpg',
+      '/images/projects/p002/warning-list.jpg',
+      '/images/projects/p002/video-window.jpg',
+      '/images/projects/p002/report-export.jpg'
+    ],
+    detailedDescription: '舟山大桥综合管理指挥平台是一个集大桥监控、预警管理、应急指挥、视频监控于一体的综合管理系统。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了大桥的全方位监控和管理。',
+    architecture: '前后端分离架构,前端使用Vue3+TypeScript+OpenLayers,后端使用FastAPI',
+    technologies: 'Vue3, TypeScript, OpenLayers, ECharts, Video.js, flv.js',
+    achievements: '数据统计效率提升80%,预警响应时间缩短60%',
+    featured: true,
+    createdAt: '2024-03-01',
+    updatedAt: '2024-07-31',
+    tags: ['交通监控', '应急指挥', '视频监控', '政企项目']
+  },
+  {
+    id: 'p003',
+    title: '嘉兴公安海防反走私系统',
+    category: 'government',
+    type: '公安监管・GIS・大数据渲染・预警系统',
+    role: '前端核心开发',
+    startDate: '2025-02',
+    endDate: '2025-08',
+    duration: '6个月',
+    techStack: ['Vue3', 'TypeScript', 'OpenLayers', 'IndexedDB', 'ECharts'],
+    description: '公安海防反走私系统,实现船舶监控、电子围栏、预警规则等功能',
+    objectives: ['实现船舶监控功能', '建立电子围栏系统', '开发预警规则引擎', '实现大数据渲染'],
+    responsibilities: [
+      '实现船舶监控模块',
+      '开发电子围栏功能',
+      '开发预警规则引擎',
+      '优化大数据渲染性能',
+      '开发地图工具'
+    ],
+    highlights: [
+      '实现船舶监控、电子围栏、预警规则、地图工具、技防评估',
+      '首屏加载从 25s → 3s',
+      '处理万级点位高并发渲染',
+      '保障系统 7×24 小时稳定运行'
+    ],
+    technicalHighlights: [
+      '使用IndexedDB缓存船舶数据',
+      '优化OpenLayers渲染性能',
+      '实现万级点位渲染',
+      '开发预警规则引擎'
+    ],
+    businessHighlights: [
+      '首屏加载优化88%',
+      '数据处理能力提升10倍',
+      '系统稳定性达到99.9%'
+    ],
+    challenges: [
+      {
+        problem: '万级点位渲染性能问题',
+        solution: '使用Web Worker+数据分层+虚拟渲染',
+        result: '首屏加载从25秒优化到3秒'
+      },
+      {
+        problem: '大数据量内存占用过高',
+        solution: '使用IndexedDB缓存+数据懒加载',
+        result: '内存占用降低60%'
+      }
+    ],
+    metrics: {
+      performance: '88%↑',
+      codeLines: '18,000+',
+      documents: '12+',
+      commits: '250+',
+      improvement: '首屏加载优化88%'
+    },
+    screenshots: [
+      '/images/projects/p003/main-monitor.jpg',
+      '/images/projects/p003/electronic-fence.jpg',
+      '/images/projects/p003/warning-list.jpg',
+      '/images/projects/p003/statistics-chart.jpg'
+    ],
+    detailedDescription: '嘉兴公安海防反走私系统是一个基于GIS的海防监控预警系统,主要功能包括船舶监控、电子围栏、预警规则、地图工具等。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了万级点位的高性能渲染。',
+    architecture: '前后端分离架构,前端使用Vue3+TypeScript+OpenLayers+IndexedDB,后端使用FastAPI',
+    technologies: 'Vue3, TypeScript, OpenLayers, IndexedDB, ECharts',
+    achievements: '首屏加载优化88%,处理万级点位,系统稳定运行',
+    featured: true,
+    createdAt: '2025-02-01',
+    updatedAt: '2025-08-31',
+    tags: ['海防监控', '大数据渲染', '预警系统', '政企项目']
+  },
+  {
+    id: 'p004',
+    title: '远洋渔业智能驾驶舱',
+    category: 'government',
+    type: '渔业监管・AI 助手・数据可视化',
+    role: '前端核心开发',
+    startDate: '2025-05',
+    endDate: '2025-08',
+    duration: '3个月',
+    techStack: ['Vue3', 'TypeScript', 'Socket.IO', 'OpenLayers', 'ECharts', 'AI对话'],
+    description: '远洋渔业智能驾驶舱,实现GIS地图、船舶监控、天气预警、AI智能助手等功能',
+    objectives: ['实现GIS地图功能', '开发船舶监控模块', '集成AI智能助手', '实现多维度数据可视化'],
+    responsibilities: [
+      '实现GIS地图功能',
+      '开发船舶监控模块',
+      '集成AI智能助手',
+      '实现天气预警功能',
+      '开发多维度数据可视化'
+    ],
+    highlights: [
+      '实现 GIS 地图、船舶监控、天气预警、AI 智能助手',
+      '完成 AI 对话、流式输出、Markdown 渲染',
+      '台风、潮汐、波高、气压多维度可视化'
+    ],
+    technicalHighlights: [
+      '使用Socket.IO实现实时数据推送',
+      '集成AI对话接口',
+      '实现Markdown渲染',
+      '多维度数据可视化'
+    ],
+    businessHighlights: [
+      '提升监控效率60%',
+      '预警准确率提升70%',
+      '用户满意度提升80%'
+    ],
+    challenges: [
+      {
+        problem: 'AI对话流式输出实现',
+        solution: '使用SSE+前端缓存',
+        result: '实现流畅的流式输出体验'
+      },
+      {
+        problem: '多维度数据可视化',
+        solution: '使用ECharts+自定义组件',
+        result: '实现丰富的可视化效果'
+      }
+    ],
+    metrics: {
+      performance: '75%↑',
+      codeLines: '10,000+',
+      documents: '6+',
+      commits: '100+',
+      improvement: '监控效率提升60%'
+    },
+    screenshots: [
+      '/images/projects/p004/dashboard.jpg',
+      '/images/projects/p004/ai-assistant.jpg',
+      '/images/projects/p004/weather-chart.jpg',
+      '/images/projects/p004/vessel-search.jpg'
+    ],
+    detailedDescription: '远洋渔业智能驾驶舱是一个集GIS地图、船舶监控、天气预警、AI智能助手于一体的综合监控系统。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了智能化的渔业监控和管理。',
+    architecture: '前后端分离架构,前端使用Vue3+TypeScript+OpenLayers+Socket.IO,后端使用FastAPI',
+    technologies: 'Vue3, TypeScript, Socket.IO, OpenLayers, ECharts, AI对话',
+    achievements: '提升监控效率60%,预警准确率提升70%',
+    featured: false,
+    createdAt: '2025-05-01',
+    updatedAt: '2025-08-31',
+    tags: ['渔业监管', 'AI助手', '数据可视化', '政企项目']
+  },
+  {
+    id: 'p005',
+    title: 'MyPrivateAgent 私有化 AI 助手',
+    category: 'ai',
+    type: '全栈・私有化部署・对话系统',
+    role: '独立全栈负责人',
+    startDate: '2025-03',
+    endDate: '2025-05',
+    duration: '2个月',
+    techStack: ['FastAPI', 'LangChain', 'LangGraph', 'Ollama', 'MySQL', 'SSE', 'JWT'],
+    description: '私有化AI助手,支持本地模型部署,插件化系统,会话管理等功能',
+    objectives: ['实现私有化AI助手', '支持本地模型部署', '开发插件化系统', '实现会话管理'],
+    responsibilities: [
+      '负责前后端架构设计',
+      '实现用户体系和JWT认证',
+      '集成Ollama本地模型',
+      '开发插件化Skills系统',
+      '实现流式输出功能'
+    ],
+    highlights: [
+      '前后端分离架构,用户体系 + JWT 安全认证',
+      '支持本地 Llama 3.1 / DeepSeek 等模型私有化部署',
+      '插件化 Skills 系统、会话管理、流式输出',
+      '生产级部署、数据完全隐私安全'
+    ],
+    technicalHighlights: [
+      '使用LangGraph实现智能体工作流',
+      '集成Ollama本地模型',
+      '开发插件化系统',
+      '实现SSE流式输出'
+    ],
+    businessHighlights: [
+      '数据完全隐私安全',
+      '支持多种本地模型',
+      '插件化扩展能力强'
+    ],
+    challenges: [
+      {
+        problem: '本地模型部署和调用',
+        solution: '使用Ollama+API封装',
+        result: '支持多种本地模型部署'
+      },
+      {
+        problem: '插件化系统设计',
+        solution: '使用动态加载+沙箱隔离',
+        result: '实现安全的插件化系统'
+      }
+    ],
+    metrics: {
+      codeLines: '8,000+',
+      documents: '5+',
+      commits: '80+',
+      commits: '支持5+种本地模型'
+    },
+    screenshots: [
+      '/images/projects/p005/chat-main.jpg',
+      '/images/projects/p005/model-settings.jpg',
+      '/images/projects/p005/plugin-center.jpg',
+      '/images/projects/p005/session-list.jpg'
+    ],
+    repo: 'https://github.com/WXMISUKI/MyPrivateAgent',
+    detailedDescription: 'MyPrivateAgent是一个私有化AI助手,支持本地模型部署,插件化系统,会话管理等功能。项目使用FastAPI+LangChain+LangGraph+Ollama技术栈,实现了完整的私有化AI助手解决方案。',
+    architecture: '前后端分离架构,前端使用Vue3+TypeScript,后端使用FastAPI+LangChain+LangGraph+Ollama',
+    technologies: 'FastAPI, LangChain, LangGraph, Ollama, MySQL, SSE, JWT',
+    achievements: '支持多种本地模型,数据完全隐私安全,插件化扩展能力强',
+    featured: true,
+    createdAt: '2025-03-01',
+    updatedAt: '2025-05-31',
+    tags: ['AI助手', '私有化部署', 'LangChain', 'LangGraph']
+  },
+  {
+    id: 'p006',
+    title: '旅行规划智能体',
+    category: 'ai',
+    type: '智能体・工作流编排・工具调用',
+    role: '独立全栈负责人',
+    startDate: '2025-06',
+    endDate: '2025-07',
+    duration: '1个月',
+    techStack: ['Python', 'LangGraph', 'FastAPI', 'MCP', 'SSE'],
+    description: '旅行规划智能体,实现意图识别、参数提取、任务编排、工具调用等功能',
+    objectives: ['实现意图识别', '开发任务编排引擎', '集成外部工具', '实现错误降级'],
+    responsibilities: [
+      '负责智能体架构设计',
+      '实现意图识别和参数提取',
+      '开发SmartPlanner任务编排',
+      '集成外部工具API',
+      '实现错误降级和监控'
+    ],
+    highlights: [
+      '7 大类意图识别、自动参数提取',
+      '自研 SmartPlanner 任务编排',
+      '对接 12306、天气、搜索等工具',
+      '支持并行执行、错误降级、监控日志'
+    ],
+    technicalHighlights: [
+      '使用LangGraph实现工作流编排',
+      '开发SmartPlanner任务编排引擎',
+      '集成多种外部工具API',
+      '实现错误降级和监控'
+    ],
+    businessHighlights: [
+      '意图识别准确率90%+',
+      '任务编排成功率85%+',
+      '支持7大类意图'
+    ],
+    challenges: [
+      {
+        problem: '意图识别和参数提取',
+        solution: '使用LangGraph+自定义规则',
+        result: '意图识别准确率90%+'
+      },
+      {
+        problem: '任务编排和错误降级',
+        solution: '自研SmartPlanner+状态机',
+        result: '任务编排成功率85%+'
+      }
+    ],
+    metrics: {
+      codeLines: '6,000+',
+      documents: '4+',
+      commits: '60+',
+      improvement: '意图识别准确率90%+'
+    },
+    screenshots: [
+      '/images/projects/p006/agent-interface.jpg',
+      '/images/projects/p006/plan-result.jpg',
+      '/images/projects/p006/workflow-desc.jpg',
+      '/images/projects/p006/api-doc.jpg'
+    ],
+    repo: 'https://github.com/WXMISUKI/TravelAgent',
+    detailedDescription: '旅行规划智能体是一个基于LangGraph的智能体应用,实现意图识别、参数提取、任务编排、工具调用等功能。项目使用Python+LangGraph+FastAPI技术栈,实现了完整的智能体解决方案。',
+    architecture: '前后端分离架构,后端使用Python+LangGraph+FastAPI+MCP',
+    technologies: 'Python, LangGraph, FastAPI, MCP, SSE',
+    achievements: '意图识别准确率90%+,任务编排成功率85%+,支持7大类意图',
+    featured: true,
+    createdAt: '2025-06-01',
+    updatedAt: '2025-07-31',
+    tags: ['智能体', '工作流编排', '工具调用', 'LangGraph']
+  },
+  {
+    id: 'p007',
+    title: '番剧智能体',
+    category: 'ai',
+    type: '垂直领域智能体・多轮对话',
+    role: '独立全栈负责人',
+    startDate: '2025-07',
+    endDate: '2025-08',
+    duration: '1个月',
+    techStack: ['Python', 'LangGraph', 'FastAPI', 'SSE'],
+    description: '番剧智能体,实现多轮对话、指代消解、多平台数据源对接等功能',
+    objectives: ['实现多轮对话', '开发指代消解功能', '对接多平台数据源', '实现自动降级'],
+    responsibilities: [
+      '负责智能体架构设计',
+      '实现多轮对话和记忆管理',
+      '开发指代消解功能',
+      '对接多平台数据源',
+      '实现流式输出和异常处理'
+    ],
+    highlights: [
+      '11 种意图体系、多轮记忆、指代消解',
+      '对接多平台数据源、自动降级',
+      '流式输出、异常处理、链路追踪'
+    ],
+    technicalHighlights: [
+      '使用LangGraph实现多轮对话',
+      '开发指代消解算法',
+      '对接多平台数据源',
+      '实现自动降级和链路追踪'
+    ],
+    businessHighlights: [
+      '对话准确率85%+',
+      '支持11种意图',
+      '覆盖多平台数据源'
+    ],
+    challenges: [
+      {
+        problem: '多轮对话和指代消解',
+        solution: '使用LangGraph+记忆管理+上下文理解',
+        result: '对话准确率85%+'
+      },
+      {
+        problem: '多平台数据源对接',
+        solution: '统一API接口+自动降级',
+        result: '覆盖多平台数据源'
+      }
+    ],
+    metrics: {
+      codeLines: '5,000+',
+      documents: '3+',
+      commits: '50+',
+      improvement: '对话准确率85%+'
+    },
+    screenshots: [
+      '/images/projects/p007/chat-demo.jpg',
+      '/images/projects/p007/recommend-page.jpg',
+      '/images/projects/p007/ranking-page.jpg',
+      '/images/projects/p007/multi-round-chat.jpg'
+    ],
+    repo: 'https://github.com/WXMISUKI/AnimeAgent',
+    detailedDescription: '番剧智能体是一个垂直领域的智能体应用,实现多轮对话、指代消解、多平台数据源对接等功能。项目使用Python+LangGraph+FastAPI技术栈,实现了完整的番剧推荐智能体。',
+    architecture: '前后端分离架构,后端使用Python+LangGraph+FastAPI',
+    technologies: 'Python, LangGraph, FastAPI, SSE',
+    achievements: '对话准确率85%+,支持11种意图,覆盖多平台数据源',
+    featured: false,
+    createdAt: '2025-07-01',
+    updatedAt: '2025-08-31',
+    tags: ['智能体', '多轮对话', '垂直领域', 'LangGraph']
+  },
+  {
+    id: 'p008',
+    title: 'TTS Pro 企业级语音合成',
+    category: 'ai',
+    type: '大模型应用・语音克隆・服务化',
+    role: '大模型应用工程师',
+    startDate: '2025-08',
+    endDate: '2025-09',
+    duration: '1个月',
+    techStack: ['Python', 'Flask', 'CosyVoice3', 'Docker'],
+    description: '企业级语音合成服务,实现零样本音色克隆、高质量TTS、服务化部署等功能',
+    objectives: ['实现零样本音色克隆', '开发高质量TTS服务', '实现服务化部署', '集成到智能体'],
+    responsibilities: [
+      '集成CosyVoice3模型',
+      '开发Flask API接口',
+      '实现任务调度和健康检查',
+      '实现Docker容器化部署',
+      '集成到智能体'
+    ],
+    highlights: [
+      '零样本音色克隆、高质量 TTS',
+      'Flask API 封装、任务调度、健康检查',
+      'Docker 容器化、生产环境高可用',
+      '可与智能体联动实现语音播报'
+    ],
+    technicalHighlights: [
+      '集成CosyVoice3模型',
+      '开发Flask API接口',
+      '实现任务调度和健康检查',
+      '实现Docker容器化部署'
+    ],
+    businessHighlights: [
+      '音色克隆效果好',
+      'TTS质量高',
+      '生产环境稳定'
+    ],
+    challenges: [
+      {
+        problem: '零样本音色克隆',
+        solution: '使用CosyVoice3+微调',
+        result: '音色克隆效果好'
+      },
+      {
+        problem: '服务化部署',
+        solution: '使用Docker+负载均衡',
+        result: '生产环境高可用'
+      }
+    ],
+    metrics: {
+      codeLines: '4,000+',
+      documents: '3+',
+      commits: '40+',
+      improvement: 'TTS质量高'
+    },
+    screenshots: [
+      '/images/projects/p008/tts-interface.jpg',
+      '/images/projects/p008/api-call.jpg',
+      '/images/projects/p008/deploy-desc.jpg'
+    ],
+    repo: 'https://github.com/WXMISUKI/TTSPro',
+    detailedDescription: 'TTS Pro是一个企业级语音合成服务,实现零样本音色克隆、高质量TTS、服务化部署等功能。项目使用Python+Flask+CosyVoice3技术栈,实现了完整的语音合成解决方案。',
+    architecture: '前后端分离架构,后端使用Python+Flask+CosyVoice3,部署使用Docker',
+    technologies: 'Python, Flask, CosyVoice3, Docker',
+    achievements: '音色克隆效果好,TTS质量高,生产环境稳定',
+    featured: false,
+    createdAt: '2025-08-01',
+    updatedAt: '2025-09-30',
+    tags: ['TTS', '语音克隆', '大模型应用', 'Docker']
+  }
+];
+
+export default projects;

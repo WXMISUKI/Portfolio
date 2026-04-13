@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
-import { useUIStore } from '@/store/modules';
+import { useUIStore } from '@/store';
 
 const routes: RouteRecordRaw[] = [
   {
