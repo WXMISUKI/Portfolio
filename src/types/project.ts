@@ -24,6 +24,7 @@ export interface Project {
     codeLines?: string;
     documents?: string;
     commits?: string;
+    localModels?: string;
     improvement?: string;
   };
   screenshots: string[];

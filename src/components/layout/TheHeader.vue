@@ -2,11 +2,17 @@
   <header class="header">
     <div class="container-custom">
       <div class="header-content">
-        <!-- Logo -->
-        <div class="header-logo">
-          <RouterLink to="/" class="logo-link">
-            <span class="logo-text">罗雍来</span>
-          </RouterLink>
+        <!-- Logo区域 -->
+        <div class="header-left">
+          <!-- Logo -->
+          <div class="header-logo">
+            <RouterLink to="/" class="logo-link">
+              <span class="logo-text">罗雍来</span>
+            </RouterLink>
+          </div>
+
+          <!-- 主题切换按钮 -->
+          <ThemeToggle />
         </div>
 
         <!-- 导航 -->
@@ -58,6 +64,7 @@
 import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useUIStore } from '@/store';
+import ThemeToggle from '@/components/ui/ThemeToggle.vue';
 
 const route = useRoute();
 const uiStore = useUIStore();
@@ -91,10 +98,12 @@ const closeMobileMenu = () => {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
-  background: rgba(15, 23, 42, 0.8);
+  z-index: var(--z-sticky);
+  background: var(--color-primary);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
+  transition: background var(--duration-normal) var(--ease-in-out),
+              border-color var(--duration-normal) var(--ease-in-out);
 }
 
 .header-content {
@@ -102,6 +111,13 @@ const closeMobileMenu = () => {
   align-items: center;
   justify-content: space-between;
   height: 64px;
+  gap: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .header-logo .logo-link {
@@ -115,7 +131,17 @@ const closeMobileMenu = () => {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-accent);
+  transition: color var(--duration-normal) var(--ease-in-out);
+}
+
+/* 深色主题发光效果 */
+html.dark .logo-text {
   text-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+/* 浅色主题无发光效果 */
+html.light .logo-text {
+  text-shadow: none;
 }
 
 .header-nav {
@@ -128,7 +154,7 @@ const closeMobileMenu = () => {
   color: var(--color-text);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: color var(--duration-normal) var(--ease-in-out);
   position: relative;
 }
 
@@ -217,7 +243,8 @@ const closeMobileMenu = () => {
   color: var(--color-text);
   text-decoration: none;
   border-bottom: 1px solid var(--color-border);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background var(--duration-normal) var(--ease-in-out),
+              color var(--duration-normal) var(--ease-in-out);
 }
 
 .mobile-nav-link:hover {
@@ -228,6 +255,11 @@ const closeMobileMenu = () => {
 .mobile-nav-link.router-link-active {
   color: var(--color-accent);
   background: rgba(6, 182, 212, 0.1);
+}
+
+/* 浅色主题激活链接背景 */
+html.light .mobile-nav-link.router-link-active {
+  background: rgba(99, 102, 241, 0.1);
 }
 
 /* Slide transition */

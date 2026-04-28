@@ -83,6 +83,8 @@ onUnmounted(() => {
 <style scoped>
 .home {
   min-height: 100vh;
+  background-color: var(--color-background);
+  transition: background-color var(--duration-normal) var(--ease-in-out);
 }
 
 .hero-section {
@@ -91,6 +93,8 @@ onUnmounted(() => {
   align-items: center;
   position: relative;
   padding: 80px 0;
+  background-color: var(--color-background);
+  transition: background-color var(--duration-normal) var(--ease-in-out);
 }
 
 .hero-content {
@@ -104,8 +108,18 @@ onUnmounted(() => {
   font-weight: 700;
   color: var(--color-accent);
   margin-bottom: 16px;
-  text-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
   animation: fadeInUp 0.8s ease-out;
+  transition: color var(--duration-normal) var(--ease-in-out);
+}
+
+/* 深色主题发光效果 */
+html.dark .hero-title {
+  text-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+}
+
+/* 浅色主题无发光效果 */
+html.light .hero-title {
+  text-shadow: none;
 }
 
 .hero-subtitle {
@@ -118,6 +132,7 @@ onUnmounted(() => {
   justify-content: center;
   gap: 8px;
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 .hero-description {
@@ -129,6 +144,7 @@ onUnmounted(() => {
   margin-left: auto;
   margin-right: auto;
   animation: fadeInUp 0.8s ease-out 0.4s backwards;
+  transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 .hero-tags {
@@ -142,7 +158,8 @@ onUnmounted(() => {
 
 .hero-tags .tag {
   padding: 8px 16px;
-  background: rgba(6, 182, 212, 0.1);
+  background: var(--color-accent);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
   color: var(--color-accent);
   border: 1px solid var(--color-accent);
   border-radius: 20px;
@@ -151,8 +168,25 @@ onUnmounted(() => {
   transition: all 0.3s ease;
 }
 
-.hero-tags .tag:hover {
+/* 深色主题标签背景 */
+html.dark .hero-tags .tag {
+  background: rgba(6, 182, 212, 0.1);
+}
+
+html.dark .hero-tags .tag:hover {
   background: rgba(6, 182, 212, 0.2);
+}
+
+/* 浅色主题标签背景 */
+html.light .hero-tags .tag {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+}
+
+html.light .hero-tags .tag:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+}
+
+.hero-tags .tag:hover {
   transform: translateY(-2px);
 }
 
@@ -177,10 +211,12 @@ onUnmounted(() => {
 .btn-primary {
   background: var(--color-accent);
   color: var(--color-background);
+  background-image: var(--gradient-accent);
 }
 
 .btn-primary:hover {
   background: var(--color-accent-hover);
+  background-image: var(--gradient-accent-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-accent);
 }
@@ -192,8 +228,14 @@ onUnmounted(() => {
 }
 
 .btn-secondary:hover {
-  background: rgba(6, 182, 212, 0.1);
+  background: var(--color-accent);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
   transform: translateY(-2px);
+}
+
+/* 深色主题hover */
+html.dark .btn-secondary:hover {
+  background: rgba(6, 182, 212, 0.1);
 }
 
 .cursor-blink {

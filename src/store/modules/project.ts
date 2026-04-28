@@ -23,7 +23,7 @@ export const useProjectStore = defineStore('project', {
       }
 
       // 按技术栈筛选
-      if (state.filter.techStack.length > 0) {
+      if (state.filter.techStack && state.filter.techStack.length > 0) {
         result = result.filter(p =>
           state.filter.techStack!.some(tech => p.techStack.includes(tech))
         );

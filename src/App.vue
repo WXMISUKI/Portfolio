@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="min-h-screen bg-background text-primary">
+  <div id="app" class="app">
     <TheHeader />
-    <main class="min-h-screen">
+    <main class="main">
       <RouterView />
     </main>
     <TheFooter />
@@ -15,10 +15,20 @@ import TheFooter from '@/components/layout/TheFooter.vue';
 import BackToTop from '@/components/layout/BackToTop.vue';
 </script>
 
-<style scoped>
-#app {
+<style>
+.app {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--duration-normal) var(--ease-in-out),
+              color var(--duration-normal) var(--ease-in-out);
+}
+
+.main {
+  min-height: calc(100vh - 64px);
+  padding-top: 64px;
 }
 </style>

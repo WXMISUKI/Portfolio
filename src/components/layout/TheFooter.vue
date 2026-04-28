@@ -39,9 +39,11 @@
 
 <style scoped>
 .footer {
-  background: var(--color-primary);
-  border-top: 1px solid var(--color-border);
+  background: var(--color-footer-bg);
+  border-top: 1px solid var(--color-footer-border);
   padding: 48px 0 24px;
+  transition: background-color var(--duration-normal) var(--ease-in-out),
+              border-color var(--duration-normal) var(--ease-in-out);
 }
 
 .footer-content {
@@ -62,11 +64,13 @@
   font-weight: 700;
   color: var(--color-accent);
   margin: 0;
+  transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 .footer-subtitle {
   color: var(--color-text-secondary);
   margin: 0;
+  transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 .footer-heading {
@@ -74,6 +78,7 @@
   font-weight: 600;
   color: var(--color-text);
   margin: 0;
+  transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 .footer-nav {
@@ -85,7 +90,7 @@
 .footer-nav a {
   color: var(--color-text-secondary);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 .footer-nav a:hover {
@@ -101,18 +106,21 @@
 .footer-contact p {
   color: var(--color-text-secondary);
   margin: 0;
+  transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 .footer-bottom {
   padding-top: 24px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-footer-border);
   text-align: center;
+  transition: border-color var(--duration-normal) var(--ease-in-out);
 }
 
 .footer-bottom p {
   color: var(--color-text-secondary);
   margin: 0;
   font-size: 0.875rem;
+  transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 @media (max-width: 768px) {

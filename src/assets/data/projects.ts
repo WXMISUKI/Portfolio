@@ -332,7 +332,7 @@ export const projects: Project[] = [
       codeLines: '8,000+',
       documents: '5+',
       commits: '80+',
-      commits: '支持5+种本地模型'
+      localModels: '支持5+种本地模型'
     },
     screenshots: [
       '/images/projects/p005/chat-main.jpg',

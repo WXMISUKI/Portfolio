@@ -1,17 +1,42 @@
+/* ========================================
+   导入CSS变量定义
+   ======================================== */
+@import './variables.css';
+
 /* 全局样式 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-primary: #0F172A;
-  --color-accent: #06B6D4;
-  --color-background: #020617;
-  --color-text: #E2E8F0;
-  --color-text-secondary: #94A3B8;
-  --color-border: #1E293B;
+/* ========================================
+   主题切换过渡动画
+   ======================================== */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* 排除不需要过渡的元素 */
+img,
+video,
+canvas,
+iframe,
+svg {
+  transition: none !important;
+}
+
+/* 快速过渡的元素 */
+.theme-toggle,
+.nav-link,
+.btn,
+.card-base {
+  transition-duration: 200ms;
+}
+
+/* ========================================
+   基础重置
+   ======================================== */
 * {
   box-sizing: border-box;
   margin: 0;
