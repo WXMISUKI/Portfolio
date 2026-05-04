@@ -4,14 +4,12 @@
       <div class="header-content">
         <!-- Logo区域 -->
         <div class="header-left">
-          <!-- Logo -->
           <div class="header-logo">
             <RouterLink to="/" class="logo-link">
               <span class="logo-text">罗雍来</span>
             </RouterLink>
           </div>
 
-          <!-- 主题切换按钮 -->
           <ThemeToggle />
         </div>
 
@@ -28,7 +26,15 @@
           </RouterLink>
         </nav>
 
-        <!-- 移动端菜单按钮 -->
+        <a
+          class="header-resume-link"
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          简历
+        </a>
+
         <button
           class="mobile-menu-btn"
           @click="toggleMobileMenu"
@@ -148,6 +154,23 @@ html.light .logo-text {
   display: flex;
   align-items: center;
   gap: 32px;
+}
+
+.header-resume-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  padding: 10px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+.header-resume-link:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .nav-link {
@@ -276,6 +299,10 @@ html.light .mobile-nav-link.router-link-active {
 
 @media (max-width: 768px) {
   .header-nav {
+    display: none;
+  }
+
+  .header-resume-link {
     display: none;
   }
 

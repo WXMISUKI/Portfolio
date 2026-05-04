@@ -1,76 +1,145 @@
 <template>
   <div class="home">
-    <!-- 英雄区 -->
     <section class="hero-section">
-      <div class="container-custom">
-        <div class="hero-content">
-          <div class="hero-text">
-            <h1 class="hero-title">罗雍来</h1>
-            <h2 class="hero-subtitle">
-              <span v-for="(word, index) in typedWords" :key="index">
-                {{ word }}
-              </span>
-              <span class="cursor-blink">|</span>
-            </h2>
-            <p class="hero-description">
-              拥有政企大型项目前端工程经验，擅长GIS地图、视频流、数据大屏、低延迟优化；同时具备AI智能体/大模型应用全栈开发能力
+      <div class="container-custom hero-grid">
+        <div class="hero-copy">
+          <span class="hero-kicker">Frontend Engineering × AI Agent</span>
+          <h1 class="hero-title">{{ profile.name }}</h1>
+          <h2 class="hero-subtitle">
+            <span>{{ typedWords }}</span>
+            <span class="cursor-blink">|</span>
+          </h2>
+          <p class="hero-description">{{ profile.description }}</p>
+
+          <div class="hero-tags">
+            <Tag v-for="tag in heroTags" :key="tag" size="small" variant="outline">
+              {{ tag }}
+            </Tag>
+          </div>
+
+          <div class="hero-actions">
+            <RouterLink to="/projects" class="hero-link primary">查看项目</RouterLink>
+            <a href="/resume.pdf" class="hero-link secondary" target="_blank" rel="noopener noreferrer">
+              查看简历
+            </a>
+            <a :href="profile.contact.github" class="hero-link ghost" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="hero-panel-card intro-card">
+            <span class="panel-label">核心定位</span>
+            <h3>{{ profile.title }}</h3>
+            <p>
+              聚焦政企复杂业务系统、GIS、视频流低延迟优化与 AI 智能体全栈落地，强调真实项目交付与性能结果。
             </p>
+          </div>
 
-            <!-- 标签 -->
-            <div class="hero-tags">
-              <span v-for="tag in tags" :key="tag" class="tag">
-                {{ tag }}
-              </span>
-            </div>
+          <div class="hero-panel-grid">
+            <RouterLink to="/projects" class="hero-panel-card quick-card">
+              <span class="panel-label">精选项目</span>
+              <strong>AI 项目优先</strong>
+              <p>已上线项目可直接在线访问。</p>
+            </RouterLink>
 
-            <!-- 按钮 -->
-            <div class="hero-actions">
-              <RouterLink to="/projects" class="btn btn-primary">
-                查看项目 →
-              </RouterLink>
-              <a href="/resume.pdf" class="btn btn-secondary" target="_blank">
-                下载简历
-              </a>
-            </div>
+            <RouterLink to="/about" class="hero-panel-card quick-card">
+              <span class="panel-label">职业背景</span>
+              <strong>工程 + AI 复合能力</strong>
+              <p>查看时间线、成果和求职方向。</p>
+            </RouterLink>
+
+            <RouterLink to="/skills" class="hero-panel-card quick-card">
+              <span class="panel-label">技术栈</span>
+              <strong>项目驱动的技能矩阵</strong>
+              <p>不是只列技术名，而是关联真实项目。</p>
+            </RouterLink>
+
+            <RouterLink to="/contact" class="hero-panel-card quick-card">
+              <span class="panel-label">联系我</span>
+              <strong>快速建立沟通</strong>
+              <p>联系方式、简历和 GitHub 均可直达。</p>
+            </RouterLink>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- 滚动提示 -->
-      <div class="scroll-indicator">
-        <div class="scroll-arrow"></div>
+    <section class="home-section">
+      <div class="container-custom">
+        <SectionTitle title="精选项目" description="优先展示已上线的 AI 项目，并保留能体现工程深度的政企项目。" />
+
+        <div class="featured-grid">
+          <article v-for="project in featuredProjects" :key="project.id" class="featured-card">
+            <div class="featured-card-top">
+              <Badge :variant="project.category === 'ai' ? 'success' : 'primary'" size="small">
+                {{ project.category === 'ai' ? 'AI 项目' : '政企项目' }}
+              </Badge>
+              <span class="featured-role">{{ project.role }}</span>
+            </div>
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.description }}</p>
+            <div class="featured-techs">
+              <Tag v-for="tech in project.techStack.slice(0, 4)" :key="tech" size="small">
+                {{ tech }}
+              </Tag>
+            </div>
+            <div class="featured-actions">
+              <RouterLink :to="`/projects`" class="featured-link">查看详情</RouterLink>
+              <a
+                v-if="project.demo"
+                :href="project.demo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="featured-link accent"
+              >
+                在线访问
+              </a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { Badge, Tag } from '@/components/ui';
+import SectionTitle from '@/components/common/SectionTitle.vue';
+import profile from '@/assets/data/profile';
+import { useProjectStore } from '@/store';
 
-const typedWords = ref(['前端工程专家']);
-let wordIndex = 0;
+const projectStore = useProjectStore();
+const heroTags = ['政企项目', 'GIS', '视频流', '性能优化', 'AI 智能体', '全栈开发'];
+const words = ['前端工程专家', 'AI 全栈开发者', '智能体开发工程师'];
+
+const wordIndex = ref(0);
+const typedWords = computed(() => words[wordIndex.value]);
 let typeInterval: number | null = null;
 
-const tags = ref([
-  '政企项目',
-  'GIS',
-  '视频监控',
-  'AI 智能体',
-  '大模型',
-  '全栈开发',
-]);
+const featuredProjects = computed(() =>
+  [...projectStore.projects]
+    .filter((project) => project.featured)
+    .sort((a, b) => {
+      if (a.category !== b.category) {
+        return a.category === 'ai' ? -1 : 1;
+      }
 
-const words = ['前端工程专家', 'AI 全栈开发者', '性能优化专家'];
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    })
+    .slice(0, 4)
+);
 
-const typeWriter = () => {
-  if (wordIndex < words.length) {
-    typedWords.value = [words[wordIndex]];
-    wordIndex = (wordIndex + 1) % words.length;
+onMounted(async () => {
+  if (!projectStore.projects.length) {
+    await projectStore.loadProjects();
   }
-};
 
-onMounted(() => {
-  typeInterval = window.setInterval(typeWriter, 3000);
+  typeInterval = window.setInterval(() => {
+    wordIndex.value = (wordIndex.value + 1) % words.length;
+  }, 2600);
 });
 
 onUnmounted(() => {
@@ -83,190 +152,195 @@ onUnmounted(() => {
 <style scoped>
 .home {
   min-height: 100vh;
-  background-color: var(--color-background);
-  transition: background-color var(--duration-normal) var(--ease-in-out);
+  background:
+    radial-gradient(circle at top left, rgba(6, 182, 212, 0.12), transparent 26%),
+    radial-gradient(circle at 82% 18%, rgba(99, 102, 241, 0.12), transparent 22%),
+    var(--color-background);
 }
 
-.hero-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 80px 0;
-  background-color: var(--color-background);
-  transition: background-color var(--duration-normal) var(--ease-in-out);
+.hero-section,
+.home-section {
+  padding: 56px 0 64px;
 }
 
-.hero-content {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.hero-copy {
+  padding: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  background:
+    linear-gradient(150deg, rgba(6, 182, 212, 0.12), transparent 42%),
+    rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+}
+
+.hero-kicker {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: var(--color-accent);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .hero-title {
-  font-size: 4rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  margin-bottom: 16px;
-  animation: fadeInUp 0.8s ease-out;
-  transition: color var(--duration-normal) var(--ease-in-out);
-}
-
-/* 深色主题发光效果 */
-html.dark .hero-title {
-  text-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
-}
-
-/* 浅色主题无发光效果 */
-html.light .hero-title {
-  text-shadow: none;
+  font-size: clamp(2.8rem, 5vw, 5.2rem);
+  line-height: 0.95;
+  color: var(--color-text);
 }
 
 .hero-subtitle {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  animation: fadeInUp 0.8s ease-out 0.2s backwards;
-  transition: color var(--duration-normal) var(--ease-in-out);
+  margin: 18px 0 22px;
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  color: var(--color-accent);
 }
 
 .hero-description {
-  font-size: 1.125rem;
   color: var(--color-text-secondary);
-  line-height: 1.8;
-  margin-bottom: 32px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  animation: fadeInUp 0.8s ease-out 0.4s backwards;
-  transition: color var(--duration-normal) var(--ease-in-out);
+  line-height: 1.9;
+  font-size: 1.02rem;
+}
+
+.hero-tags,
+.featured-techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .hero-tags {
+  margin: 28px 0;
+}
+
+.hero-actions,
+.featured-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  justify-content: center;
-  margin-bottom: 40px;
-  animation: fadeInUp 0.8s ease-out 0.6s backwards;
 }
 
-.hero-tags .tag {
-  padding: 8px 16px;
-  background: var(--color-accent);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
-  color: var(--color-accent);
-  border: 1px solid var(--color-accent);
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
+.hero-link,
+.featured-link,
+.quick-card {
+  transition: all var(--duration-normal) var(--ease-in-out);
 }
 
-/* 深色主题标签背景 */
-html.dark .hero-tags .tag {
-  background: rgba(6, 182, 212, 0.1);
-}
-
-html.dark .hero-tags .tag:hover {
-  background: rgba(6, 182, 212, 0.2);
-}
-
-/* 浅色主题标签背景 */
-html.light .hero-tags .tag {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
-}
-
-html.light .hero-tags .tag:hover {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
-}
-
-.hero-tags .tag:hover {
-  transform: translateY(-2px);
-}
-
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  animation: fadeInUp 0.8s ease-out 0.8s backwards;
-}
-
-.btn {
+.hero-link {
   display: inline-flex;
   align-items: center;
-  padding: 12px 32px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  justify-content: center;
+  min-width: 128px;
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
 }
 
-.btn-primary {
-  background: var(--color-accent);
+.hero-link.primary {
+  background: var(--gradient-accent);
   color: var(--color-background);
-  background-image: var(--gradient-accent);
+  border-color: transparent;
 }
 
-.btn-primary:hover {
-  background: var(--color-accent-hover);
-  background-image: var(--gradient-accent-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-accent);
-}
-
-.btn-secondary {
-  background: transparent;
+.hero-link.secondary:hover,
+.hero-link.ghost:hover,
+.featured-link:hover,
+.quick-card:hover {
+  border-color: var(--color-accent);
   color: var(--color-accent);
-  border: 2px solid var(--color-accent);
-}
-
-.btn-secondary:hover {
-  background: var(--color-accent);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
   transform: translateY(-2px);
 }
 
-/* 深色主题hover */
-html.dark .btn-secondary:hover {
-  background: rgba(6, 182, 212, 0.1);
+.hero-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.hero-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.hero-panel-card,
+.featured-card {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  background: rgba(15, 23, 42, 0.46);
+  backdrop-filter: blur(10px);
+}
+
+.panel-label,
+.featured-role {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-panel-card h3,
+.hero-panel-card strong,
+.featured-card h3 {
+  color: var(--color-text);
+}
+
+.hero-panel-card p,
+.featured-card p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.intro-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quick-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.featured-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.featured-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.featured-link {
+  color: var(--color-text);
+}
+
+.featured-link.accent {
+  color: var(--color-accent);
 }
 
 .cursor-blink {
   animation: blink 1s step-end infinite;
-}
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: bounce 2s infinite;
-}
-
-.scroll-arrow {
-  width: 24px;
-  height: 24px;
-  border-right: 2px solid var(--color-accent);
-  border-bottom: 2px solid var(--color-accent);
-  transform: rotate(45deg);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes blink {
@@ -278,36 +352,27 @@ html.dark .btn-secondary:hover {
   }
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  50% {
-    transform: translateX(-50%) translateY(-10px);
+@media (max-width: 1100px) {
+  .hero-grid,
+  .featured-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.5rem;
+  .hero-section,
+  .home-section {
+    padding: 36px 0 48px;
   }
 
-  .hero-subtitle {
-    font-size: 1.5rem;
+  .hero-copy,
+  .hero-panel-card,
+  .featured-card {
+    padding: 22px;
   }
 
-  .hero-description {
-    font-size: 1rem;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .btn {
-    width: 100%;
-    max-width: 300px;
+  .hero-panel-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

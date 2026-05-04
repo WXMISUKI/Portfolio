@@ -58,10 +58,24 @@ const router = createRouter({
 });
 
 router.beforeEach((to, _from, next) => {
-  // 设置页面标题
   document.title = `${to.meta.title} - 罗雍来`;
 
-  // 关闭移动端菜单
+  const description = String(to.meta.description || '罗雍来 - 前端工程与 AI 全栈开发者作品集');
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.setAttribute('content', description);
+  }
+
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) {
+    ogTitle.setAttribute('content', `${to.meta.title} - 罗雍来`);
+  }
+
+  const ogDescription = document.querySelector('meta[property="og:description"]');
+  if (ogDescription) {
+    ogDescription.setAttribute('content', description);
+  }
+
   const uiStore = useUIStore();
   if (uiStore.isMobileMenuOpen) {
     uiStore.closeMobileMenu();

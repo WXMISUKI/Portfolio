@@ -5,8 +5,8 @@ export const profile: Profile = {
   title: '前端工程专家・AI 全栈开发者',
   subtitle: '罗雍来｜前端工程 & AI 全栈开发者作品集',
   description:
-    '我是一名前端工程化 + AI 全栈复合型开发者,拥有 8 个月 + 政企大型项目实战经验,深耕海事、公安、大桥、渔业、管道监控等领域;同时自主深耕 大模型应用与智能体开发 7 个月 +,具备完整全栈能力。能够独立负责:复杂业务系统开发、GIS 地图与大数据渲染、视频流低延迟优化、数据可视化与大屏、AI 对话界面与流式输出、大模型应用 & 智能体全栈开发。',
-  avatar: '/images/avatar/default.jpg',
+    '我是一名前端工程化与 AI 全栈复合型开发者，具备政企复杂业务系统落地经验，也能够独立完成智能体与大模型应用的全栈开发。长期聚焦 GIS 地图、大数据渲染、视频流低延迟优化、数据可视化大屏，以及对话式 AI 产品设计与交付。',
+  avatar: '',
   tags: ['#技术驱动', '#性能优化', '#用户体验', '#团队协作', '#持续学习'],
   contact: {
     phone: '19042637070',
@@ -84,7 +84,7 @@ export const timeline = [
 
 export const metrics = [
   { label: '项目数量', value: 8, suffix: '+', prefix: '' },
-  { label: '代码提交', value: 500, suffix: '+', prefix: '' },
+  { label: '代码仓库', value: 7, suffix: '+', prefix: '' },
   { label: '技术文档', value: 20, suffix: '+', prefix: '' },
   { label: '性能优化', value: 50, suffix: '%', prefix: '平均提升' }
 ];

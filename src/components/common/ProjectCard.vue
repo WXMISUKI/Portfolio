@@ -1,7 +1,7 @@
 <template>
   <Card variant="elevated" padding="medium" class="project-card" hoverable>
-    <div class="project-image" v-if="project.image">
-      <img :src="project.image" :alt="project.title" />
+    <div class="project-image" v-if="coverImage">
+      <img :src="coverImage" :alt="project.title" />
       <div class="project-overlay">
         <div class="project-category">{{ getCategoryName(project.category) }}</div>
       </div>
@@ -64,13 +64,28 @@
           查看详情
         </Button>
         <Button
-          v-if="project.repo"
+          v-if="project.demo"
+          :href="project.demo"
+          target="_blank"
+          rel="noopener noreferrer"
           variant="secondary"
           size="small"
-          icon="github"
-          @click="handleViewRepo"
+          icon="arrow-right"
+          aria-label="访问在线项目"
         >
-          代码
+          在线访问
+        </Button>
+        <Button
+          v-if="project.repo"
+          :href="project.repo"
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="ghost"
+          size="small"
+          icon="github"
+          aria-label="查看项目代码"
+        >
+          代码仓库
         </Button>
       </div>
     </div>
@@ -78,26 +93,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { Card, Button, Badge, Tag } from '@/components/ui';
-
-interface ProjectMetrics {
-  performance?: string;
-  codeLines?: string;
-  duration?: string;
-}
-
-interface Project {
-  id: string;
-  title: string;
-  category: 'government' | 'ai' | 'personal';
-  description: string;
-  image?: string;
-  techStack: string[];
-  highlights: string[];
-  metrics?: ProjectMetrics;
-  repo?: string;
-  demo?: string;
-}
+import type { Project } from '@/types/project';
 
 interface Props {
   project: Project;
@@ -107,8 +105,9 @@ const props = defineProps<Props>();
 
 const emit = defineEmits<{
   viewDetails: [project: Project];
-  viewRepo: [repo: string];
 }>();
+
+const coverImage = computed(() => props.project.screenshots[0] ?? '');
 
 const getCategoryName = (category: string) => {
   const map: Record<string, string> = {
@@ -130,12 +129,6 @@ const getBadgeVariant = (category: string) => {
 
 const handleViewDetails = () => {
   emit('viewDetails', props.project);
-};
-
-const handleViewRepo = () => {
-  if (props.project.repo) {
-    emit('viewRepo', props.project.repo);
-  }
 };
 </script>
 

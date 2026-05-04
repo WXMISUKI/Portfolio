@@ -4,7 +4,10 @@
       <div class="footer-content">
         <div class="footer-section">
           <h3 class="footer-title">罗雍来</h3>
-          <p class="footer-subtitle">前端工程 & AI 全栈开发者</p>
+          <p class="footer-subtitle">前端工程专家・AI 全栈开发者</p>
+          <p class="footer-description">
+            聚焦政企复杂业务系统、GIS、视频流低延迟优化与智能体全栈落地，当前作品集优先展示可在线访问的 AI 项目。
+          </p>
         </div>
 
         <div class="footer-section">
@@ -20,8 +23,12 @@
         <div class="footer-section">
           <h4 class="footer-heading">联系方式</h4>
           <div class="footer-contact">
-            <p>邮箱: 19042637070@139.com</p>
-            <p>GitHub: WXMISUKI</p>
+            <a href="mailto:19042637070@139.com">邮箱：19042637070@139.com</a>
+            <a href="tel:19042637070">电话：19042637070</a>
+            <a href="https://github.com/WXMISUKI" target="_blank" rel="noopener noreferrer">
+              GitHub：WXMISUKI
+            </a>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">简历 PDF</a>
           </div>
         </div>
       </div>
@@ -73,6 +80,11 @@
   transition: color var(--duration-normal) var(--ease-in-out);
 }
 
+.footer-description {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
 .footer-heading {
   font-size: 1.125rem;
   font-weight: 600;
@@ -103,10 +115,13 @@
   gap: 8px;
 }
 
-.footer-contact p {
+.footer-contact a {
   color: var(--color-text-secondary);
-  margin: 0;
   transition: color var(--duration-normal) var(--ease-in-out);
+}
+
+.footer-contact a:hover {
+  color: var(--color-accent);
 }
 
 .footer-bottom {

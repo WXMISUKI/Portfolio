@@ -1,5 +1,20 @@
 import type { Project } from '@/types/project';
 
+const asset = (path: string) => new URL(path, import.meta.url).href;
+
+const projectDemos: Partial<Record<string, string>> = {
+  p005: 'https://my-private-agent.vercel.app/',
+  p006: 'https://travel-agent-seven-chi.vercel.app/',
+  p007: 'https://anime-agent-two.vercel.app/',
+};
+
+const projectRepos: Partial<Record<string, string>> = {
+  p005: 'https://github.com/WXMISUKI/MyPrivateAgent.git',
+  p006: 'https://github.com/WXMISUKI/travel-agent.git',
+  p007: 'https://github.com/WXMISUKI/animeAgent.git',
+  p008: 'https://github.com/WXMISUKI/TTSPro',
+};
+
 export const projects: Project[] = [
   {
     id: 'p001',
@@ -57,10 +72,10 @@ export const projects: Project[] = [
       improvement: '首屏加载优化95%'
     },
     screenshots: [
-      '/images/projects/p001/map-monitor.jpg',
-      '/images/projects/p001/warning-panel.jpg',
-      '/images/projects/p001/video-monitor.jpg',
-      '/images/projects/p001/vessel-list.jpg'
+      asset('../images/projects/p001/map-monitor.jpg'),
+      asset('../images/projects/p001/warning-panel.jpg'),
+      asset('../images/projects/p001/video-monitor.jpg'),
+      asset('../images/projects/p001/vessel-list.jpg')
     ],
     detailedDescription: '该项目是一个基于GIS的海底管道监控预警系统,主要功能包括船舶实时监控、三级预警、电子围栏、VHF广播等。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了大规模船舶数据的实时渲染和监控。',
     architecture: '前后端分离架构,前端使用Vue3+TypeScript+OpenLayers,后端使用FastAPI,视频流使用SRS+FFmpeg',
@@ -127,10 +142,10 @@ export const projects: Project[] = [
       improvement: '数据统计效率提升80%'
     },
     screenshots: [
-      '/images/projects/p002/monitor-dashboard.jpg',
-      '/images/projects/p002/warning-list.jpg',
-      '/images/projects/p002/video-window.jpg',
-      '/images/projects/p002/report-export.jpg'
+      asset('../images/projects/p002/monitor-dashboard.jpg'),
+      asset('../images/projects/p002/warning-list.jpg'),
+      asset('../images/projects/p002/video-window.jpg'),
+      asset('../images/projects/p002/report-export.jpg')
     ],
     detailedDescription: '舟山大桥综合管理指挥平台是一个集大桥监控、预警管理、应急指挥、视频监控于一体的综合管理系统。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了大桥的全方位监控和管理。',
     architecture: '前后端分离架构,前端使用Vue3+TypeScript+OpenLayers,后端使用FastAPI',
@@ -197,10 +212,9 @@ export const projects: Project[] = [
       improvement: '首屏加载优化88%'
     },
     screenshots: [
-      '/images/projects/p003/main-monitor.jpg',
-      '/images/projects/p003/electronic-fence.jpg',
-      '/images/projects/p003/warning-list.jpg',
-      '/images/projects/p003/statistics-chart.jpg'
+      asset('../images/projects/p003/main-monitor.jpg'),
+      asset('../images/projects/p003/video-window.jpg'),
+      asset('../images/projects/p003/warning-list.jpg')
     ],
     detailedDescription: '嘉兴公安海防反走私系统是一个基于GIS的海防监控预警系统,主要功能包括船舶监控、电子围栏、预警规则、地图工具等。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了万级点位的高性能渲染。',
     architecture: '前后端分离架构,前端使用Vue3+TypeScript+OpenLayers+IndexedDB,后端使用FastAPI',
@@ -266,10 +280,10 @@ export const projects: Project[] = [
       improvement: '监控效率提升60%'
     },
     screenshots: [
-      '/images/projects/p004/dashboard.jpg',
-      '/images/projects/p004/ai-assistant.jpg',
-      '/images/projects/p004/weather-chart.jpg',
-      '/images/projects/p004/vessel-search.jpg'
+      asset('../images/projects/p004/dashboard.jpg'),
+      asset('../images/projects/p004/ai-assistant.jpg'),
+      asset('../images/projects/p004/weather-chart.jpg'),
+      asset('../images/projects/p004/vessel-search.jpg')
     ],
     detailedDescription: '远洋渔业智能驾驶舱是一个集GIS地图、船舶监控、天气预警、AI智能助手于一体的综合监控系统。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了智能化的渔业监控和管理。',
     architecture: '前后端分离架构,前端使用Vue3+TypeScript+OpenLayers+Socket.IO,后端使用FastAPI',
@@ -335,12 +349,13 @@ export const projects: Project[] = [
       localModels: '支持5+种本地模型'
     },
     screenshots: [
-      '/images/projects/p005/chat-main.jpg',
-      '/images/projects/p005/model-settings.jpg',
-      '/images/projects/p005/plugin-center.jpg',
-      '/images/projects/p005/session-list.jpg'
+      asset('../images/projects/p005/chat-main.jpg'),
+      asset('../images/projects/p005/model-settings.jpg'),
+      asset('../images/projects/p005/plugin-center.jpg'),
+      asset('../images/projects/p005/session-list.jpg')
     ],
-    repo: 'https://github.com/WXMISUKI/MyPrivateAgent',
+    demo: projectDemos.p005,
+    repo: projectRepos.p005,
     detailedDescription: 'MyPrivateAgent是一个私有化AI助手,支持本地模型部署,插件化系统,会话管理等功能。项目使用FastAPI+LangChain+LangGraph+Ollama技术栈,实现了完整的私有化AI助手解决方案。',
     architecture: '前后端分离架构,前端使用Vue3+TypeScript,后端使用FastAPI+LangChain+LangGraph+Ollama',
     technologies: 'FastAPI, LangChain, LangGraph, Ollama, MySQL, SSE, JWT',
@@ -405,12 +420,13 @@ export const projects: Project[] = [
       improvement: '意图识别准确率90%+'
     },
     screenshots: [
-      '/images/projects/p006/agent-interface.jpg',
-      '/images/projects/p006/plan-result.jpg',
-      '/images/projects/p006/workflow-desc.jpg',
-      '/images/projects/p006/api-doc.jpg'
+      asset('../images/projects/p006/agent-interface.jpg'),
+      asset('../images/projects/p006/plan-result.jpg'),
+      asset('../images/projects/p006/workflow-desc.jpg'),
+      asset('../images/projects/p006/api-doc.jpg')
     ],
-    repo: 'https://github.com/WXMISUKI/TravelAgent',
+    demo: projectDemos.p006,
+    repo: projectRepos.p006,
     detailedDescription: '旅行规划智能体是一个基于LangGraph的智能体应用,实现意图识别、参数提取、任务编排、工具调用等功能。项目使用Python+LangGraph+FastAPI技术栈,实现了完整的智能体解决方案。',
     architecture: '前后端分离架构,后端使用Python+LangGraph+FastAPI+MCP',
     technologies: 'Python, LangGraph, FastAPI, MCP, SSE',
@@ -474,12 +490,13 @@ export const projects: Project[] = [
       improvement: '对话准确率85%+'
     },
     screenshots: [
-      '/images/projects/p007/chat-demo.jpg',
-      '/images/projects/p007/recommend-page.jpg',
-      '/images/projects/p007/ranking-page.jpg',
-      '/images/projects/p007/multi-round-chat.jpg'
+      asset('../images/projects/p007/chat-demo.jpg'),
+      asset('../images/projects/p007/recommend-page.jpg'),
+      asset('../images/projects/p007/ranking-page.jpg'),
+      asset('../images/projects/p007/multi-round-chat.jpg')
     ],
-    repo: 'https://github.com/WXMISUKI/AnimeAgent',
+    demo: projectDemos.p007,
+    repo: projectRepos.p007,
     detailedDescription: '番剧智能体是一个垂直领域的智能体应用,实现多轮对话、指代消解、多平台数据源对接等功能。项目使用Python+LangGraph+FastAPI技术栈,实现了完整的番剧推荐智能体。',
     architecture: '前后端分离架构,后端使用Python+LangGraph+FastAPI',
     technologies: 'Python, LangGraph, FastAPI, SSE',
@@ -544,11 +561,10 @@ export const projects: Project[] = [
       improvement: 'TTS质量高'
     },
     screenshots: [
-      '/images/projects/p008/tts-interface.jpg',
-      '/images/projects/p008/api-call.jpg',
-      '/images/projects/p008/deploy-desc.jpg'
+      asset('../images/projects/p008/tts-interface.jpg'),
+      asset('../images/projects/p008/api-call.jpg')
     ],
-    repo: 'https://github.com/WXMISUKI/TTSPro',
+    repo: projectRepos.p008,
     detailedDescription: 'TTS Pro是一个企业级语音合成服务,实现零样本音色克隆、高质量TTS、服务化部署等功能。项目使用Python+Flask+CosyVoice3技术栈,实现了完整的语音合成解决方案。',
     architecture: '前后端分离架构,后端使用Python+Flask+CosyVoice3,部署使用Docker',
     technologies: 'Python, Flask, CosyVoice3, Docker',

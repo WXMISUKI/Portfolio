@@ -23,6 +23,7 @@
           :key="tech"
           :variant="selectedTechs.includes(tech) ? 'primary' : 'outline'"
           size="small"
+          clickable
           :closable="selectedTechs.includes(tech)"
           @click="toggleTech(tech)"
           @close="removeTech(tech)"
@@ -40,7 +41,6 @@
         variant="default"
         size="medium"
         clearable
-        @input="handleSearch"
       />
     </div>
     
@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { Button, Tag, Input } from '@/components/ui';
 
 interface Category {
@@ -93,6 +93,20 @@ const selectedCategory = ref(props.modelValue?.category || 'all');
 const selectedTechs = ref<string[]>(props.modelValue?.techStack || []);
 const searchQuery = ref(props.modelValue?.search || '');
 
+watch(
+  () => props.modelValue,
+  (value) => {
+    selectedCategory.value = value?.category || 'all';
+    selectedTechs.value = value?.techStack || [];
+    searchQuery.value = value?.search || '';
+  },
+  { deep: true }
+);
+
+watch(searchQuery, () => {
+  emitFilters();
+});
+
 const hasFilters = computed(() => {
   return selectedCategory.value !== 'all' || 
          selectedTechs.value.length > 0 || 
@@ -120,10 +134,6 @@ const removeTech = (tech: string) => {
     selectedTechs.value.splice(index, 1);
     emitFilters();
   }
-};
-
-const handleSearch = () => {
-  emitFilters();
 };
 
 const clearFilters = () => {

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="罗雍来作品集">
+  <defs>
+    <linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#4F46E5" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#020617" />
+  <path d="M18 16h10v22c0 6 3.5 9 8.5 9 3.6 0 6.8-1.2 9.5-3.2v8.8C42.7 55.5 38.1 57 33 57c-9.8 0-15-5.8-15-16.9V16z" fill="url(#g)" />
+  <circle cx="47" cy="18" r="5" fill="#E2E8F0" />
+</svg>

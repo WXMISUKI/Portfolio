@@ -2,10 +2,14 @@
   <component
     :is="tag"
     :class="buttonClasses"
-    :disabled="disabled || loading"
+    :disabled="tag === 'button' ? disabled || loading : undefined"
     @click="handleClick"
     :aria-label="ariaLabel"
     :aria-disabled="disabled || loading"
+    :href="href"
+    :target="target"
+    :rel="rel"
+    :type="tag === 'button' ? nativeType : undefined"
   >
     <span v-if="loading" class="button-spinner">
       <svg class="spinner-icon" viewBox="0 0 24 24">
@@ -44,6 +48,8 @@ interface Props {
   icon?: 'arrow-right' | 'download' | 'github';
   href?: string;
   target?: string;
+  rel?: string;
+  nativeType?: 'button' | 'submit' | 'reset';
   ariaLabel?: string;
   fullWidth?: boolean;
 }
@@ -54,6 +60,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   loading: false,
   fullWidth: false,
+  nativeType: 'button',
 });
 
 const emit = defineEmits<{

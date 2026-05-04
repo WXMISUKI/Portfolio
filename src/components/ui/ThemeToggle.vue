@@ -1,12 +1,12 @@
 <template>
   <button
     class="theme-toggle"
-    @click="handleClick"
+    type="button"
+    @click="toggleTheme"
     :aria-label="isDark ? '切换到浅色主题' : '切换到深色主题'"
     title="切换主题"
   >
     <span class="theme-icon">
-      <!-- 太阳图标（深色主题时显示） -->
       <svg
         v-if="isDark"
         class="icon-sun"
@@ -28,8 +28,6 @@
         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
       </svg>
-
-      <!-- 月亮图标（浅色主题时显示） -->
       <svg
         v-else
         class="icon-moon"
@@ -53,32 +51,7 @@ import { computed } from 'vue';
 import { useTheme } from '@/composables/useTheme';
 
 const { theme, toggleTheme } = useTheme();
-
 const isDark = computed(() => theme.value === 'dark');
-
-/**
- * 处理主题切换点击事件
- */
-const handleClick = () => {
-  console.log('[ThemeToggle] =========================================');
-  console.log('[ThemeToggle] 点击主题切换按钮');
-
-  console.log('[ThemeToggle] 当前状态:');
-  console.log('[ThemeToggle]   - theme.value:', theme.value);
-  console.log('[ThemeToggle]   - isDark:', isDark.value);
-  console.log('[ThemeToggle]   - DOM class:', document.documentElement.className);
-  console.log('[ThemeToggle]   - localStorage:', localStorage.getItem('portfolio-theme'));
-
-  // 执行切换
-  toggleTheme();
-
-  console.log('[ThemeToggle] 切换后状态:');
-  console.log('[ThemeToggle]   - theme.value:', theme.value);
-  console.log('[ThemeToggle]   - isDark:', isDark.value);
-  console.log('[ThemeToggle]   - DOM class:', document.documentElement.className);
-  console.log('[ThemeToggle]   - localStorage:', localStorage.getItem('portfolio-theme'));
-  console.log('[ThemeToggle] =========================================');
-};
 </script>
 
 <style scoped>
@@ -98,7 +71,6 @@ const handleClick = () => {
   backdrop-filter: blur(10px);
 }
 
-/* 浅色主题样式 */
 html.light .theme-toggle {
   background: rgba(0, 0, 0, 0.03);
   border-color: rgba(0, 0, 0, 0.08);
@@ -144,25 +116,16 @@ html.light .theme-toggle:hover {
   user-select: none;
 }
 
-/* 深色主题图标颜色 */
-html.dark .theme-toggle .icon-sun {
-  color: var(--color-accent);
-}
-
-html.dark .theme-toggle .icon-moon {
-  color: var(--color-text);
-}
-
-/* 浅色主题图标颜色 */
+html.dark .theme-toggle .icon-sun,
 html.light .theme-toggle .icon-sun {
   color: var(--color-accent);
 }
 
+html.dark .theme-toggle .icon-moon,
 html.light .theme-toggle .icon-moon {
   color: var(--color-text);
 }
 
-/* 响应式调整 */
 @media (max-width: 640px) {
   .theme-text {
     display: none;

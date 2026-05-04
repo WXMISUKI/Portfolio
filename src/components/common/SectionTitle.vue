@@ -1,5 +1,5 @@
 <template>
-  <div class="section-title">
+  <div class="section-title" :style="{ '--section-align': align }">
     <h2 class="title">
       <span class="title-text">{{ title }}</span>
       <span v-if="badge" class="title-badge">{{ badge }}</span>
@@ -27,7 +27,7 @@ withDefaults(defineProps<Props>(), {
 <style scoped>
 .section-title {
   margin-bottom: var(--spacing-3xl);
-  text-align: var(--align, left);
+  text-align: var(--section-align, left);
 }
 
 .title {
@@ -68,17 +68,43 @@ html.dark .title-badge {
   color: var(--color-text-secondary);
   line-height: var(--leading-relaxed);
   max-width: 800px;
-  margin: 0 auto var(--spacing-xl);
+  margin: 0 0 var(--spacing-xl);
   transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 .divider {
   width: 80px;
   height: 4px;
-  margin: 0 auto;
+  margin: 0;
   background: var(--gradient-accent);
   border-radius: 2px;
   transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+.section-title[style*='center'] .title {
+  justify-content: center;
+}
+
+.section-title[style*='center'] .description {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title[style*='center'] .divider {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title[style*='right'] .title {
+  justify-content: flex-end;
+}
+
+.section-title[style*='right'] .description {
+  margin-left: auto;
+}
+
+.section-title[style*='right'] .divider {
+  margin-left: auto;
 }
 
 /* Responsive */
