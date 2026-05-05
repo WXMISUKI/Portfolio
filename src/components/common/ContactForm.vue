@@ -1,71 +1,92 @@
 <template>
   <Card variant="elevated" padding="large" class="contact-form-card">
     <div class="contact-form-header">
-      <p class="contact-form-kicker">Message</p>
-      <h3>联系表单</h3>
+      <p class="contact-form-kicker">Contact Guide</p>
+      <h3>沟通说明</h3>
       <p>
-        当前站点先提供静态表单结构，避免出现“看起来可发信、实际无后端”的伪能力。正式接入后可无缝切换到 EmailJS 或 Formspree。
+        当前站点定位为个人作品展示页，不提供在线提交表单，避免出现“页面可填但消息无法可靠送达”的伪能力。
+        如需沟通，请直接使用邮箱、电话、GitHub 或简历中的联系方式。
       </p>
     </div>
 
-    <form class="contact-form" @submit.prevent="handleSubmit">
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="contact-name">姓名</label>
-          <Input id="contact-name" v-model="form.name" placeholder="请输入姓名" />
-        </div>
-        <div class="form-group">
-          <label for="contact-email">邮箱</label>
-          <Input id="contact-email" v-model="form.email" type="email" placeholder="请输入邮箱" />
-        </div>
+    <div class="contact-guide-grid">
+      <div class="guide-item">
+        <span class="guide-label">推荐方式</span>
+        <strong class="guide-title">邮箱直达</strong>
+        <p>适合投递、面试邀请、项目合作和技术交流，信息链路最清晰。</p>
       </div>
+      <div class="guide-item">
+        <span class="guide-label">附件资料</span>
+        <strong class="guide-title">简历 PDF</strong>
+        <p>适合招聘方和面试官快速下载、转发和归档。</p>
+      </div>
+      <div class="guide-item">
+        <span class="guide-label">代码能力</span>
+        <strong class="guide-title">GitHub 仓库</strong>
+        <p>可直接查看项目实现、提交记录和技术结构。</p>
+      </div>
+      <div class="guide-item">
+        <span class="guide-label">沟通边界</span>
+        <strong class="guide-title">展示站优先简洁可信</strong>
+        <p>不接入无必要后端服务，保证页面信息真实、明确、可验证。</p>
+      </div>
+    </div>
 
-      <div class="form-group">
-        <label for="contact-subject">主题</label>
-        <Input id="contact-subject" v-model="form.subject" placeholder="例如：合作、面试、项目交流" />
-      </div>
+    <div class="contact-cta-group">
+      <Button
+        :href="`mailto:${SITE_EMAIL}?subject=${encodeURIComponent('作品集沟通')}`"
+        variant="primary"
+        aria-label="通过邮箱联系"
+      >
+        发送邮件
+      </Button>
+      <Button
+        href="/resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        variant="secondary"
+        icon="download"
+        aria-label="查看简历 PDF"
+      >
+        查看简历
+      </Button>
+      <Button
+        :href="profile.contact.github"
+        target="_blank"
+        rel="noopener noreferrer"
+        variant="ghost"
+        icon="github"
+        aria-label="访问 GitHub"
+      >
+        GitHub
+      </Button>
+    </div>
 
-      <div class="form-group">
-        <label for="contact-message">消息内容</label>
-        <textarea
-          id="contact-message"
-          v-model="form.message"
-          rows="6"
-          placeholder="请输入你的需求或问题"
-        />
+    <div class="contact-notes">
+      <div class="note-item">
+        <span class="note-label">邮箱</span>
+        <span class="note-value">{{ SITE_EMAIL }}</span>
       </div>
-
-      <div class="contact-form-actions">
-        <Button native-type="submit" variant="primary">打开邮件客户端</Button>
-        <span class="contact-form-note">提交后会自动拼接邮件内容，使用本机默认邮件客户端发送。</span>
+      <div class="note-item">
+        <span class="note-label">电话</span>
+        <span class="note-value">{{ profile.contact.phone }}</span>
       </div>
-    </form>
+      <div class="note-item">
+        <span class="note-label">意向城市</span>
+        <span class="note-value">{{ profile.jobExpectations.cities.join(' / ') }}</span>
+      </div>
+      <div class="note-item">
+        <span class="note-label">求职状态</span>
+        <span class="note-value">开放机会</span>
+      </div>
+    </div>
   </Card>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
-import { Card, Button, Input } from '@/components/ui';
-
-const form = reactive({
-  name: '',
-  email: '',
-  subject: '',
-  message: '',
-});
-
-const handleSubmit = () => {
-  const subject = encodeURIComponent(form.subject || '作品集沟通');
-  const lines = [
-    `姓名：${form.name || '未填写'}`,
-    `邮箱：${form.email || '未填写'}`,
-    '',
-    '消息内容：',
-    form.message || '未填写',
-  ];
-  const body = encodeURIComponent(lines.join('\n'));
-  window.location.href = `mailto:19042637070@139.com?subject=${subject}&body=${body}`;
-};
+import { Button, Card } from '@/components/ui'
+import profile from '@/assets/data/profile'
+import { SITE_EMAIL } from '@/config/site'
 </script>
 
 <style scoped>
@@ -94,62 +115,70 @@ const handleSubmit = () => {
 
 .contact-form-header p {
   color: var(--color-text-secondary);
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.form-grid {
+.contact-guide-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
-.form-group {
+.guide-item,
+.note-item {
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: rgba(15, 23, 42, 0.32);
+}
+
+.guide-item {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.form-group label {
+.guide-label,
+.note-label {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.guide-title,
+.note-value {
   color: var(--color-text);
-  font-size: var(--font-size-sm);
 }
 
-.form-group textarea {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  background: var(--color-primary);
-  color: var(--color-text);
-  resize: vertical;
+.guide-item p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
 }
 
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.12);
-}
-
-.contact-form-actions {
+.contact-cta-group {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 12px;
+  margin-top: 24px;
 }
 
-.contact-form-note {
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
+.contact-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.note-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 @media (max-width: 768px) {
-  .form-grid {
+  .contact-guide-grid,
+  .contact-notes {
     grid-template-columns: 1fr;
   }
 }

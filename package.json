@@ -1,36 +1,38 @@
 {
-    "name": "portfolio",
-    "version": "1.0.0",
-    "description": "个人作品集网站 - 前端工程 & AI 全栈开发者",
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "vue-tsc && vite build",
-        "preview": "vite preview",
-        "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-        "format": "prettier --write src/"
-    },
-    "dependencies": {
-        "vue": "^3.5.13",
-        "vue-router": "^4.5.0",
-        "pinia": "^3.0.2",
-        "axios": "^1.8.4",
-        "@vueuse/core": "^13.9.0",
-        "lodash-es": "^4.17.21",
-        "dayjs": "^1.11.13"
-    },
-    "devDependencies": {
-        "@vitejs/plugin-vue": "^5.2.1",
-        "@vue/tsconfig": "^0.7.0",
-        "typescript": "~5.9.3",
-        "vite": "^6.3.2",
-        "vue-tsc": "^2.2.2",
-        "unocss": "^66.0.0",
-        "@iconify-json/carbon": "^1.2.5",
-        "eslint": "^9.21.0",
-        "@typescript-eslint/eslint-plugin": "^8.24.1",
-        "@typescript-eslint/parser": "^8.24.1",
-        "eslint-plugin-vue": "^9.32.0",
-        "prettier": "^3.5.2"
-    }
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "个人作品集网站 - 前端工程 & AI 全栈开发者",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "vue-tsc --noEmit",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "format:check": "prettier --check src public .github README.md index.html package.json eslint.config.mjs vercel.json",
+    "format": "prettier --write src public .github README.md index.html package.json eslint.config.mjs vercel.json",
+    "quality": "pnpm run format:check && pnpm run typecheck && pnpm run build"
+  },
+  "dependencies": {
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "pinia": "^3.0.2",
+    "axios": "^1.8.4",
+    "@vueuse/core": "^13.9.0",
+    "lodash-es": "^4.17.21",
+    "dayjs": "^1.11.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.7.0",
+    "typescript": "~5.9.3",
+    "vite": "^6.3.2",
+    "vue-tsc": "^2.2.2",
+    "unocss": "^66.0.0",
+    "@iconify-json/carbon": "^1.2.5",
+    "eslint": "^9.21.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.1",
+    "@typescript-eslint/parser": "^8.24.1",
+    "eslint-plugin-vue": "^9.32.0",
+    "prettier": "^3.5.2"
+  }
 }

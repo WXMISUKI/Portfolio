@@ -24,12 +24,7 @@
           </a>
           <span v-else class="contact-value">{{ item.value }}</span>
         </div>
-        <Button
-          v-if="item.copyable"
-          variant="ghost"
-          size="small"
-          @click="copyValue(item.value)"
-        >
+        <Button v-if="item.copyable" variant="ghost" size="small" @click="copyValue(item.value)">
           {{ copied === item.value ? '已复制' : '复制' }}
         </Button>
       </div>
@@ -61,29 +56,29 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { Card, Button, Badge } from '@/components/ui';
+import { computed, ref } from 'vue'
+import { Card, Button, Badge } from '@/components/ui'
 
 interface ContactItem {
-  id: string;
-  label: string;
-  value: string;
-  icon: string;
-  href?: string;
-  external?: boolean;
-  copyable?: boolean;
+  id: string
+  label: string
+  value: string
+  icon: string
+  href?: string
+  external?: boolean
+  copyable?: boolean
 }
 
 interface Props {
-  phone: string;
-  email: string;
-  github: string;
-  location: string;
+  phone: string
+  email: string
+  github: string
+  location: string
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
-const copied = ref<string | null>(null);
+const copied = ref<string | null>(null)
 
 const items = computed<ContactItem[]>(() => [
   {
@@ -116,21 +111,21 @@ const items = computed<ContactItem[]>(() => [
     value: props.location,
     icon: '⌂',
   },
-]);
+])
 
-const githubUrl = computed(() => props.github);
+const githubUrl = computed(() => props.github)
 
 const copyValue = async (value: string) => {
   try {
-    await navigator.clipboard.writeText(value);
-    copied.value = value;
+    await navigator.clipboard.writeText(value)
+    copied.value = value
     window.setTimeout(() => {
-      copied.value = null;
-    }, 1800);
+      copied.value = null
+    }, 1800)
   } catch (error) {
-    console.error('复制失败', error);
+    console.error('复制失败', error)
   }
-};
+}
 </script>
 
 <style scoped>

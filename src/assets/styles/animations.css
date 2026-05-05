@@ -72,7 +72,8 @@
 
 /* 脉冲 */
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
     transform: scale(1);
   }
@@ -94,7 +95,8 @@
 
 /* 弹跳 */
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -124,10 +126,12 @@
 
 /* 打字机光标 */
 @keyframes blink {
-  0%, 50% {
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+  51%,
+  100% {
     opacity: 0;
   }
 }
@@ -183,9 +187,10 @@
 }
 
 .transition-colors {
-  transition: color var(--duration-normal) var(--ease-in-out),
-              background-color var(--duration-normal) var(--ease-in-out),
-              border-color var(--duration-normal) var(--ease-in-out);
+  transition:
+    color var(--duration-normal) var(--ease-in-out),
+    background-color var(--duration-normal) var(--ease-in-out),
+    border-color var(--duration-normal) var(--ease-in-out);
 }
 
 .transition-transform {

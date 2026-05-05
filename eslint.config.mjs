@@ -1,10 +1,7 @@
-import js from '@eslint/js';
-import pluginVue from 'eslint-plugin-vue';
-import * as parserVue from 'vue-eslint-parser';
-import configPrettier from 'eslint-config-prettier';
-import pluginPrettier from 'eslint-plugin-prettier';
-import * as parserTypeScript from '@typescript-eslint/parser';
-import pluginTypeScript from '@typescript-eslint/eslint-plugin';
+import pluginVue from 'eslint-plugin-vue'
+import * as parserVue from 'vue-eslint-parser'
+import * as parserTypeScript from '@typescript-eslint/parser'
+import pluginTypeScript from '@typescript-eslint/eslint-plugin'
 
 export default [
   {
@@ -17,15 +14,16 @@ export default [
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
 
-  js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
-  ...configPrettier,
   {
-    plugins: {
-      prettier: pluginPrettier,
-    },
     rules: {
-      'prettier/prettier': 'warn',
+      'no-undef': 'off',
+    },
+  },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts,tsx,vue}'],
+    rules: {
+      'no-console': 'off',
     },
   },
   {
@@ -55,4 +53,4 @@ export default [
       ...pluginTypeScript.configs.recommended.rules,
     },
   },
-];
+]

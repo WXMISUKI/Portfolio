@@ -14,12 +14,7 @@
         <h3 class="timeline-title">{{ item.title }}</h3>
         <p class="timeline-description">{{ item.description }}</p>
         <div v-if="item.tags" class="timeline-tags">
-          <Tag
-            v-for="(tag, tagIndex) in item.tags"
-            :key="tagIndex"
-            variant="default"
-            size="small"
-          >
+          <Tag v-for="(tag, tagIndex) in item.tags" :key="tagIndex" variant="default" size="small">
             {{ tag }}
           </Tag>
         </div>
@@ -29,20 +24,20 @@
 </template>
 
 <script setup lang="ts">
-import Tag from '@/components/ui/Tag.vue';
+import Tag from '@/components/ui/Tag.vue'
 
 interface TimelineItem {
-  date: string;
-  title: string;
-  description: string;
-  tags?: string[];
+  date: string
+  title: string
+  description: string
+  tags?: string[]
 }
 
 interface Props {
-  items: TimelineItem[];
+  items: TimelineItem[]
 }
 
-defineProps<Props>();
+defineProps<Props>()
 </script>
 
 <style scoped>
@@ -177,21 +172,21 @@ html.light .timeline-item:hover .timeline-content {
   .timeline::before {
     left: 20px;
   }
-  
+
   .timeline-item {
     flex-direction: column;
     padding-left: 50px;
   }
-  
+
   .timeline-item-left,
   .timeline-item-right {
     flex-direction: column;
   }
-  
+
   .timeline-marker {
     left: 20px;
   }
-  
+
   .timeline-content {
     max-width: 100%;
     margin: 0 !important;

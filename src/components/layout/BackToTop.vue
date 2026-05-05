@@ -1,11 +1,6 @@
 <template>
   <transition name="fade">
-    <button
-      v-show="isVisible"
-      class="back-to-top"
-      @click="scrollToTop"
-      aria-label="返回顶部"
-    >
+    <button v-show="isVisible" class="back-to-top" @click="scrollToTop" aria-label="返回顶部">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -24,28 +19,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
 
-const isVisible = ref(false);
+const isVisible = ref(false)
 
 const handleScroll = () => {
-  isVisible.value = window.scrollY > 300;
-};
+  isVisible.value = window.scrollY > 300
+}
 
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
     behavior: 'smooth',
-  });
-};
+  })
+}
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-});
+  window.addEventListener('scroll', handleScroll)
+})
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style scoped>
@@ -81,7 +76,9 @@ onUnmounted(() => {
 /* Fade transition */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .fade-enter-from,

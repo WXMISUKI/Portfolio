@@ -3,12 +3,7 @@
     <span class="tag-content">
       <slot />
     </span>
-    <button
-      v-if="closable"
-      class="tag-close"
-      @click.stop="handleClose"
-      aria-label="关闭"
-    >
+    <button v-if="closable" class="tag-close" @click.stop="handleClose" aria-label="关闭">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 6L6 18M6 6l12 12" />
       </svg>
@@ -17,13 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 interface Props {
-  variant?: 'default' | 'primary' | 'outline';
-  size?: 'small' | 'medium' | 'large';
-  closable?: boolean;
-  clickable?: boolean;
+  variant?: 'default' | 'primary' | 'outline'
+  size?: 'small' | 'medium' | 'large'
+  closable?: boolean
+  clickable?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -31,12 +26,12 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'medium',
   closable: false,
   clickable: false,
-});
+})
 
 const emit = defineEmits<{
-  click: [event: MouseEvent];
-  close: [];
-}>();
+  click: [event: MouseEvent]
+  close: []
+}>()
 
 const tagClasses = computed(() => [
   'tag',
@@ -46,17 +41,17 @@ const tagClasses = computed(() => [
     'tag-closable': props.closable,
     'tag-clickable': props.clickable,
   },
-]);
+])
 
 const handleClick = (event: MouseEvent) => {
   if (props.clickable) {
-    emit('click', event);
+    emit('click', event)
   }
-};
+}
 
 const handleClose = () => {
-  emit('close');
-};
+  emit('close')
+}
 </script>
 
 <style scoped>

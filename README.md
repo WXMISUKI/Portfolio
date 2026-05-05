@@ -1,89 +1,98 @@
 # 个人作品集网站
 
-## 项目简介
+面向求职展示的个人作品集站点，重点展示前端工程、复杂业务系统交付、GIS、视频流低延迟优化，以及 AI 智能体全栈开发能力。
 
-这是一个面向求职展示的个人作品集网站,展示前端工程和AI全栈开发能力。
+线上地址：`https://portfolio-beta-ruddy-39.vercel.app/`
+
+## 当前状态
+
+- 主页面已完成：`首页 / 关于我 / 项目经验 / 技术栈 / 联系我`
+- 项目展示已完成：AI 项目优先排序、筛选、搜索、详情弹层、在线访问、GitHub 跳转
+- 上线基础已完成：Vercel 部署、`robots.txt`、`sitemap.xml`、基础 SEO、简历访问
+- 质量门禁已具备：`format:check + typecheck + build`
+
+## 核心展示内容
+
+- 政企复杂业务项目：GIS、视频流、预警平台、性能优化、大数据渲染
+- AI 项目：MyPrivateAgent、番剧智能体、旅行规划智能体、TTS Pro
+- 简历与联系信息：PDF 简历、邮箱、电话、GitHub
 
 ## 技术栈
 
-- **前端框架**: Vue 3.5+
-- **开发语言**: TypeScript 5.0+
-- **构建工具**: Vite 6.0+
-- **UI框架**: UnoCSS 0.60+
-- **状态管理**: Pinia 3.0+
-- **路由**: Vue Router 4.5+
+- Vue 3
+- TypeScript
+- Vite
+- Pinia
+- Vue Router
+- UnoCSS
 
-## 快速开始
-
-### 安装依赖
+## 本地开发
 
 ```bash
 pnpm install
+pnpm run dev
 ```
 
-### 启动开发服务器
+## 质量检查
 
 ```bash
-pnpm dev
-```
-
-### 构建生产版本
-
-```bash
-pnpm build
-```
-
-### 预览生产版本
-
-```bash
-pnpm preview
+pnpm run format:check
+pnpm run typecheck
+pnpm run build
+pnpm run quality
 ```
 
 ## 项目结构
 
-```
+```text
 Portfolio/
-├── public/                      # 静态资源
+├── public/                     # 静态资源、简历、SEO 文件
 ├── src/
-│   ├── assets/                 # 资源文件
-│   │   ├── styles/             # 全局样式
-│   │   ├── data/               # 静态数据
-│   │   └── images/             # 图片资源
-│   ├── components/             # 公共组件
-│   │   ├── layout/             # 布局组件
-│   │   ├── common/             # 通用组件
-│   │   └── ui/                 # UI组件
-│   ├── composables/            # 组合式函数
-│   ├── router/                 # 路由配置
-│   ├── store/                  # 状态管理
-│   ├── views/                  # 页面视图
-│   ├── utils/                  # 工具函数
-│   ├── types/                  # 类型定义
-│   ├── App.vue                 # 根组件
-│   └── main.ts                 # 入口文件
-├── uno.config.ts               # UnoCSS配置
-├── vite.config.ts              # Vite配置
-├── tsconfig.json               # TypeScript配置
-├── package.json                # 项目依赖
-└── README.md                   # 项目说明
+│   ├── assets/
+│   │   ├── data/              # 项目、技能、个人信息
+│   │   ├── images/            # 项目截图
+│   │   └── styles/            # 全局样式
+│   ├── components/
+│   │   ├── common/            # 业务组件
+│   │   ├── layout/            # 布局组件
+│   │   └── ui/                # 基础 UI 组件
+│   ├── composables/           # 组合式逻辑
+│   ├── config/                # 站点配置
+│   ├── router/                # 路由与页面 meta
+│   ├── store/                 # Pinia 状态
+│   ├── types/                 # 类型定义
+│   └── views/                 # 页面视图
+├── docs/                      # 设计文档与内容方案
+├── .github/workflows/ci.yml   # CI 质量检查
+└── vercel.json                # Vercel 部署配置
 ```
 
-## 开发规范
+## 环境变量
 
-详细的开发规范请参考 [开发规范.md](./开发规范.md)
+参考 `.env.example`：
 
-## 设计方案
+```bash
+VITE_APP_TITLE=个人作品集
+VITE_SITE_URL=https://portfolio-beta-ruddy-39.vercel.app
+```
 
-- [技术架构设计方案](./技术架构设计方案.md)
-- [功能模块设计方案](./功能模块设计方案.md)
-- [项目展示和内容组织方案](./项目展示和内容组织方案.md)
+当前站点为展示页，不依赖后端表单服务即可正常使用。
 
-## 许可证
+## 部署说明
 
-MIT
+- 平台：Vercel
+- 构建命令：`pnpm run build`
+- 输出目录：`dist`
+- CI：GitHub Actions 自动执行 `format:check + typecheck + build`
 
----
+## 相关文档
 
-**开发者**: 罗雍来
-**邮箱**: 19042637070@139.com
-**GitHub**: https://github.com/WXMISUKI
+- [个人项目集设计文档](./docs/个人项目集设计文档.md)
+- [项目展示和内容组织方案](./docs/项目展示和内容组织方案.md)
+- [开发规范](./docs/开发规范.md)
+
+## 联系方式
+
+- 开发者：罗雍来
+- 邮箱：`19042637070@139.com`
+- GitHub：`https://github.com/WXMISUKI`

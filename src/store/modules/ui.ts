@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 
 export const useUIStore = defineStore('ui', {
   state: () => ({
@@ -10,23 +10,23 @@ export const useUIStore = defineStore('ui', {
 
   actions: {
     toggleMobileMenu() {
-      this.isMobileMenuOpen = !this.isMobileMenuOpen;
+      this.isMobileMenuOpen = !this.isMobileMenuOpen
     },
 
     closeMobileMenu() {
-      this.isMobileMenuOpen = false;
+      this.isMobileMenuOpen = false
     },
 
     toggleProjectDetail() {
-      this.isProjectDetailOpen = !this.isProjectDetailOpen;
+      this.isProjectDetailOpen = !this.isProjectDetailOpen
     },
 
     closeProjectDetail() {
-      this.isProjectDetailOpen = false;
+      this.isProjectDetailOpen = false
     },
 
     updateScrollPosition(position: number) {
-      this.scrollPosition = position;
+      this.scrollPosition = position
     },
   },
-});
+})

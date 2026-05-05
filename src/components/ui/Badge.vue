@@ -5,19 +5,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 interface Props {
-  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'info';
-  size?: 'small' | 'medium';
-  dot?: boolean;
+  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'info'
+  size?: 'small' | 'medium'
+  dot?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
   size: 'medium',
   dot: false,
-});
+})
 
 const badgeClasses = computed(() => [
   'badge',
@@ -26,7 +26,7 @@ const badgeClasses = computed(() => [
   {
     'badge-dot': props.dot,
   },
-]);
+])
 </script>
 
 <style scoped>

@@ -47,11 +47,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useTheme } from '@/composables/useTheme';
+import { computed } from 'vue'
+import { useTheme } from '@/composables/useTheme'
 
-const { theme, toggleTheme } = useTheme();
-const isDark = computed(() => theme.value === 'dark');
+const { theme, toggleTheme } = useTheme()
+const isDark = computed(() => theme.value === 'dark')
 </script>
 
 <style scoped>

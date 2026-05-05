@@ -6,7 +6,7 @@
         <div class="project-category">{{ getCategoryName(project.category) }}</div>
       </div>
     </div>
-    
+
     <div class="project-content">
       <div class="project-header">
         <h3 class="project-title">{{ project.title }}</h3>
@@ -14,9 +14,9 @@
           {{ getCategoryName(project.category) }}
         </Badge>
       </div>
-      
+
       <p class="project-description">{{ project.description }}</p>
-      
+
       <div class="project-tech">
         <Tag
           v-for="(tech, index) in project.techStack.slice(0, 5)"
@@ -30,20 +30,26 @@
           +{{ project.techStack.length - 5 }}
         </Tag>
       </div>
-      
+
       <div class="project-highlights">
         <div
           v-for="(highlight, index) in project.highlights.slice(0, 3)"
           :key="index"
           class="highlight-item"
         >
-          <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            class="check-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <path d="M20 6L9 17l-5-5" />
           </svg>
           <span>{{ highlight }}</span>
         </div>
       </div>
-      
+
       <div v-if="project.metrics" class="project-metrics">
         <div v-if="project.metrics.performance" class="metric">
           <span class="metric-label">性能提升</span>
@@ -54,15 +60,9 @@
           <span class="metric-value">{{ project.metrics.codeLines }}</span>
         </div>
       </div>
-      
+
       <div class="project-actions">
-        <Button
-          variant="primary"
-          size="small"
-          @click="handleViewDetails"
-        >
-          查看详情
-        </Button>
+        <Button variant="primary" size="small" @click="handleViewDetails"> 查看详情 </Button>
         <Button
           v-if="project.demo"
           :href="project.demo"
@@ -93,43 +93,43 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Card, Button, Badge, Tag } from '@/components/ui';
-import type { Project } from '@/types/project';
+import { computed } from 'vue'
+import { Card, Button, Badge, Tag } from '@/components/ui'
+import type { Project } from '@/types/project'
 
 interface Props {
-  project: Project;
+  project: Project
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  viewDetails: [project: Project];
-}>();
+  viewDetails: [project: Project]
+}>()
 
-const coverImage = computed(() => props.project.screenshots[0] ?? '');
+const coverImage = computed(() => props.project.screenshots[0] ?? '')
 
 const getCategoryName = (category: string) => {
   const map: Record<string, string> = {
     government: '政企项目',
     ai: 'AI项目',
     personal: '个人项目',
-  };
-  return map[category] || category;
-};
+  }
+  return map[category] || category
+}
 
 const getBadgeVariant = (category: string) => {
   const map: Record<string, 'primary' | 'success' | 'warning'> = {
     government: 'primary',
     ai: 'success',
     personal: 'warning',
-  };
-  return map[category] || 'primary';
-};
+  }
+  return map[category] || 'primary'
+}
 
 const handleViewDetails = () => {
-  emit('viewDetails', props.project);
-};
+  emit('viewDetails', props.project)
+}
 </script>
 
 <style scoped>
@@ -279,15 +279,15 @@ html.dark .project-category {
   .project-image {
     height: 150px;
   }
-  
+
   .project-title {
     font-size: var(--font-size-lg);
   }
-  
+
   .project-actions {
     flex-direction: column;
   }
-  
+
   .project-actions .button {
     width: 100%;
   }

@@ -5,7 +5,8 @@
         <span class="skills-kicker">Skill Matrix</span>
         <h1 class="section-title">技术栈</h1>
         <p class="section-subtitle">
-          不只是列出技术名，而是结合真实项目说明我在哪些场景下使用过这些技术，以及它们如何支撑复杂业务系统和 AI 产品落地。
+          不只是列出技术名，而是结合真实项目说明我在哪些场景下使用过这些技术，以及它们如何支撑复杂业务系统和
+          AI 产品落地。
         </p>
       </div>
     </section>
@@ -29,7 +30,9 @@
               <SkillProgress :name="skill.name" :level="skill.proficiency * 20" />
               <p class="skill-meta">
                 关联项目：
-                <span>{{ getProjectNames(skill.projects).join('、') || '当前作品集中未直接关联' }}</span>
+                <span>{{
+                  getProjectNames(skill.projects).join('、') || '当前作品集中未直接关联'
+                }}</span>
               </p>
             </div>
           </div>
@@ -40,36 +43,34 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
-import { Badge, Card } from '@/components/ui';
-import SkillProgress from '@/components/common/SkillProgress.vue';
-import { skillCategories } from '@/assets/data/skills';
-import { useProjectStore } from '@/store';
+import { computed, onMounted } from 'vue'
+import { Badge, Card } from '@/components/ui'
+import SkillProgress from '@/components/common/SkillProgress.vue'
+import { skillCategories } from '@/assets/data/skills'
+import { useProjectStore } from '@/store'
 
-const projectStore = useProjectStore();
+const projectStore = useProjectStore()
 
 onMounted(async () => {
   if (!projectStore.projects.length) {
-    await projectStore.loadProjects();
+    await projectStore.loadProjects()
   }
-});
+})
 
 const projectNameMap = computed(() =>
   projectStore.projects.reduce<Record<string, string>>((acc, project) => {
-    acc[project.id] = project.title;
-    return acc;
+    acc[project.id] = project.title
+    return acc
   }, {})
-);
+)
 
 const getProjectNames = (projectIds?: string[]) => {
   if (!projectIds?.length) {
-    return [];
+    return []
   }
 
-  return projectIds
-    .map((projectId) => projectNameMap.value[projectId])
-    .filter(Boolean);
-};
+  return projectIds.map(projectId => projectNameMap.value[projectId]).filter(Boolean)
+}
 </script>
 
 <style scoped>

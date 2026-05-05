@@ -1,10 +1,6 @@
 <template>
   <div ref="root" class="statistics">
-    <div
-      v-for="(stat, index) in statistics"
-      :key="`${stat.label}-${index}`"
-      class="stat-item"
-    >
+    <div v-for="(stat, index) in statistics" :key="`${stat.label}-${index}`" class="stat-item">
       <div class="stat-value">
         {{ stat.prefix || '' }}{{ animatedValues[index] ?? 0 }}{{ stat.suffix || '' }}
       </div>
@@ -14,66 +10,66 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
-import type { Metric } from '@/types/common';
+import { onMounted, onUnmounted, ref } from 'vue'
+import type { Metric } from '@/types/common'
 
 interface Props {
-  statistics: Metric[];
+  statistics: Metric[]
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
-const root = ref<HTMLElement | null>(null);
-const animatedValues = ref<number[]>(props.statistics.map(() => 0));
+const root = ref<HTMLElement | null>(null)
+const animatedValues = ref<number[]>(props.statistics.map(() => 0))
 
-let observer: IntersectionObserver | null = null;
-let hasAnimated = false;
+let observer: IntersectionObserver | null = null
+let hasAnimated = false
 
 const animateNumbers = () => {
   if (hasAnimated) {
-    return;
+    return
   }
 
-  hasAnimated = true;
-  const start = performance.now();
-  const duration = 1600;
-  const targets = props.statistics.map((item) => Number(item.value) || 0);
+  hasAnimated = true
+  const start = performance.now()
+  const duration = 1600
+  const targets = props.statistics.map(item => Number(item.value) || 0)
 
   const tick = (timestamp: number) => {
-    const progress = Math.min((timestamp - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 4);
+    const progress = Math.min((timestamp - start) / duration, 1)
+    const eased = 1 - Math.pow(1 - progress, 4)
 
-    animatedValues.value = targets.map((target) => Math.round(target * eased));
+    animatedValues.value = targets.map(target => Math.round(target * eased))
 
     if (progress < 1) {
-      requestAnimationFrame(tick);
+      requestAnimationFrame(tick)
     }
-  };
+  }
 
-  requestAnimationFrame(tick);
-};
+  requestAnimationFrame(tick)
+}
 
 onMounted(() => {
   if (!root.value) {
-    return;
+    return
   }
 
   observer = new IntersectionObserver(
-    (entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        animateNumbers();
-        observer?.disconnect();
+    entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        animateNumbers()
+        observer?.disconnect()
       }
     },
     { threshold: 0.2 }
-  );
+  )
 
-  observer.observe(root.value);
-});
+  observer.observe(root.value)
+})
 
 onUnmounted(() => {
-  observer?.disconnect();
-});
+  observer?.disconnect()
+})
 </script>
 
 <style scoped>

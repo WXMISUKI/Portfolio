@@ -6,7 +6,8 @@
           <h3 class="footer-title">罗雍来</h3>
           <p class="footer-subtitle">前端工程专家・AI 全栈开发者</p>
           <p class="footer-description">
-            聚焦政企复杂业务系统、GIS、视频流低延迟优化与智能体全栈落地，当前作品集优先展示可在线访问的 AI 项目。
+            聚焦政企复杂业务系统、GIS、视频流低延迟优化与智能体全栈落地，当前作品集优先展示可在线访问的
+            AI 项目。
           </p>
         </div>
 
@@ -49,8 +50,9 @@
   background: var(--color-footer-bg);
   border-top: 1px solid var(--color-footer-border);
   padding: 48px 0 24px;
-  transition: background-color var(--duration-normal) var(--ease-in-out),
-              border-color var(--duration-normal) var(--ease-in-out);
+  transition:
+    background-color var(--duration-normal) var(--ease-in-out),
+    border-color var(--duration-normal) var(--ease-in-out);
 }
 
 .footer-content {

@@ -3,7 +3,7 @@
     <span v-if="$slots.prefix" class="input-prefix">
       <slot name="prefix" />
     </span>
-    
+
     <input
       v-model="inputValue"
       :type="type"
@@ -15,11 +15,11 @@
       @blur="handleBlur"
       @input="handleInput"
     />
-    
+
     <span v-if="$slots.suffix" class="input-suffix">
       <slot name="suffix" />
     </span>
-    
+
     <span v-if="showClearIcon" class="input-clear" @click="handleClear">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="10" />
@@ -30,17 +30,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, useSlots } from 'vue';
+import { computed, ref, useSlots } from 'vue'
 
 interface Props {
-  modelValue?: string;
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel';
-  placeholder?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  clearable?: boolean;
-  size?: 'small' | 'medium' | 'large';
-  variant?: 'default' | 'filled' | 'outlined';
+  modelValue?: string
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel'
+  placeholder?: string
+  disabled?: boolean
+  readonly?: boolean
+  clearable?: boolean
+  size?: 'small' | 'medium' | 'large'
+  variant?: 'default' | 'filled' | 'outlined'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -49,25 +49,25 @@ const props = withDefaults(defineProps<Props>(), {
   clearable: false,
   size: 'medium',
   variant: 'default',
-});
+})
 
-const slots = useSlots();
+const slots = useSlots()
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-  (e: 'focus', event: FocusEvent): void;
-  (e: 'blur', event: FocusEvent): void;
-}>();
+  (e: 'update:modelValue', value: string): void
+  (e: 'focus', event: FocusEvent): void
+  (e: 'blur', event: FocusEvent): void
+}>()
 
-const isFocused = ref(false);
+const isFocused = ref(false)
 const inputValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value),
-});
+  set: value => emit('update:modelValue', value),
+})
 
 const showClearIcon = computed(() => {
-  return props.clearable && inputValue.value && !props.disabled && !props.readonly;
-});
+  return props.clearable && inputValue.value && !props.disabled && !props.readonly
+})
 
 const inputWrapperClasses = computed(() => [
   'input-wrapper',
@@ -80,28 +80,28 @@ const inputWrapperClasses = computed(() => [
     'input-has-prefix': !!slots.prefix,
     'input-has-suffix': !!slots.suffix || showClearIcon.value,
   },
-]);
+])
 
-const inputClasses = computed(() => ['input-field']);
+const inputClasses = computed(() => ['input-field'])
 
 const handleFocus = (event: FocusEvent) => {
-  isFocused.value = true;
-  emit('focus', event);
-};
+  isFocused.value = true
+  emit('focus', event)
+}
 
 const handleBlur = (event: FocusEvent) => {
-  isFocused.value = false;
-  emit('blur', event);
-};
+  isFocused.value = false
+  emit('blur', event)
+}
 
 const handleInput = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  inputValue.value = target.value;
-};
+  const target = event.target as HTMLInputElement
+  inputValue.value = target.value
+}
 
 const handleClear = () => {
-  inputValue.value = '';
-};
+  inputValue.value = ''
+}
 </script>
 
 <style scoped>
@@ -258,12 +258,12 @@ html.dark .input-default.input-focused {
     height: 30px;
     padding: 0 8px;
   }
-  
+
   .input-medium {
     height: 36px;
     padding: 0 10px;
   }
-  
+
   .input-large {
     height: 42px;
     padding: 0 14px;

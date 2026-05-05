@@ -1,4 +1,4 @@
-import type { Skill, SkillCategory } from '@/types/skill';
+import type { Skill, SkillCategory } from '@/types/skill'
 
 export const skills: Skill[] = [
   // 前端核心
@@ -9,7 +9,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'vue',
     projects: ['p001', 'p002', 'p003', 'p004'],
-    learnedAt: '2024-01'
+    learnedAt: '2024-01',
   },
   {
     id: 's002',
@@ -18,7 +18,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'typescript',
     projects: ['p001', 'p002', 'p003', 'p004', 'p005', 'p006', 'p007', 'p008'],
-    learnedAt: '2024-01'
+    learnedAt: '2024-01',
   },
   {
     id: 's003',
@@ -27,7 +27,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'vite',
     projects: [],
-    learnedAt: '2024-01'
+    learnedAt: '2024-01',
   },
   {
     id: 's004',
@@ -36,7 +36,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'pinia',
     projects: [],
-    learnedAt: '2024-01'
+    learnedAt: '2024-01',
   },
   {
     id: 's005',
@@ -45,7 +45,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'vue-router',
     projects: [],
-    learnedAt: '2024-01'
+    learnedAt: '2024-01',
   },
   // 数据可视化
   {
@@ -55,7 +55,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'echarts',
     projects: ['p001', 'p002', 'p003', 'p004'],
-    learnedAt: '2024-02'
+    learnedAt: '2024-02',
   },
   {
     id: 's007',
@@ -64,7 +64,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'openlayers',
     projects: ['p001', 'p002', 'p003', 'p004'],
-    learnedAt: '2024-03'
+    learnedAt: '2024-03',
   },
   {
     id: 's008',
@@ -73,7 +73,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'maplibre',
     projects: [],
-    learnedAt: '2024-06'
+    learnedAt: '2024-06',
   },
   {
     id: 's009',
@@ -82,7 +82,7 @@ export const skills: Skill[] = [
     proficiency: 3,
     icon: 'three',
     projects: [],
-    learnedAt: '2024-08'
+    learnedAt: '2024-08',
   },
   // 地图&GIS
   {
@@ -92,7 +92,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'openlayers',
     projects: ['p001', 'p002', 'p003', 'p004'],
-    learnedAt: '2024-03'
+    learnedAt: '2024-03',
   },
   {
     id: 's011',
@@ -101,7 +101,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'maplibre',
     projects: [],
-    learnedAt: '2024-06'
+    learnedAt: '2024-06',
   },
   {
     id: 's012',
@@ -110,7 +110,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'geo',
     projects: ['p001', 'p002', 'p003'],
-    learnedAt: '2024-04'
+    learnedAt: '2024-04',
   },
   // AI&大模型
   {
@@ -120,7 +120,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'langchain',
     projects: ['p005'],
-    learnedAt: '2025-03'
+    learnedAt: '2025-03',
   },
   {
     id: 's014',
@@ -129,7 +129,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'langgraph',
     projects: ['p005', 'p006', 'p007'],
-    learnedAt: '2025-03'
+    learnedAt: '2025-03',
   },
   {
     id: 's015',
@@ -138,7 +138,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'ollama',
     projects: ['p005'],
-    learnedAt: '2025-03'
+    learnedAt: '2025-03',
   },
   {
     id: 's016',
@@ -147,7 +147,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'llama',
     projects: ['p005'],
-    learnedAt: '2025-03'
+    learnedAt: '2025-03',
   },
   {
     id: 's017',
@@ -156,7 +156,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'deepseek',
     projects: ['p005'],
-    learnedAt: '2025-04'
+    learnedAt: '2025-04',
   },
   {
     id: 's018',
@@ -165,7 +165,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'rag',
     projects: ['p005'],
-    learnedAt: '2025-03'
+    learnedAt: '2025-03',
   },
   {
     id: 's019',
@@ -174,7 +174,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'intent',
     projects: ['p006', 'p007'],
-    learnedAt: '2025-06'
+    learnedAt: '2025-06',
   },
   {
     id: 's020',
@@ -183,7 +183,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'tools',
     projects: ['p006'],
-    learnedAt: '2025-06'
+    learnedAt: '2025-06',
   },
   {
     id: 's021',
@@ -192,7 +192,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'workflow',
     projects: ['p005', 'p006', 'p007'],
-    learnedAt: '2025-03'
+    learnedAt: '2025-03',
   },
   {
     id: 's022',
@@ -201,7 +201,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'stream',
     projects: ['p004', 'p005', 'p006', 'p007'],
-    learnedAt: '2025-05'
+    learnedAt: '2025-05',
   },
   {
     id: 's023',
@@ -210,7 +210,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'deploy',
     projects: ['p005', 'p008'],
-    learnedAt: '2025-03'
+    learnedAt: '2025-03',
   },
   // 后端开发
   {
@@ -220,7 +220,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'python',
     projects: ['p005', 'p006', 'p007', 'p008'],
-    learnedAt: '2025-01'
+    learnedAt: '2025-01',
   },
   {
     id: 's025',
@@ -229,7 +229,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'fastapi',
     projects: ['p005', 'p006', 'p007'],
-    learnedAt: '2025-02'
+    learnedAt: '2025-02',
   },
   {
     id: 's026',
@@ -238,7 +238,7 @@ export const skills: Skill[] = [
     proficiency: 3,
     icon: 'flask',
     projects: ['p008'],
-    learnedAt: '2025-08'
+    learnedAt: '2025-08',
   },
   {
     id: 's027',
@@ -247,7 +247,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'mysql',
     projects: ['p005'],
-    learnedAt: '2025-02'
+    learnedAt: '2025-02',
   },
   {
     id: 's028',
@@ -256,7 +256,7 @@ export const skills: Skill[] = [
     proficiency: 3,
     icon: 'sqlalchemy',
     projects: ['p005'],
-    learnedAt: '2025-02'
+    learnedAt: '2025-02',
   },
   // 工程化工具
   {
@@ -266,7 +266,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'git',
     projects: [],
-    learnedAt: '2023-01'
+    learnedAt: '2023-01',
   },
   {
     id: 's030',
@@ -275,7 +275,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'docker',
     projects: ['p008'],
-    learnedAt: '2024-06'
+    learnedAt: '2024-06',
   },
   {
     id: 's031',
@@ -284,7 +284,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'vercel',
     projects: [],
-    learnedAt: '2024-05'
+    learnedAt: '2024-05',
   },
   {
     id: 's032',
@@ -293,7 +293,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'github',
     projects: [],
-    learnedAt: '2024-05'
+    learnedAt: '2024-05',
   },
   {
     id: 's033',
@@ -302,7 +302,7 @@ export const skills: Skill[] = [
     proficiency: 3,
     icon: 'monitor',
     projects: ['p001', 'p002', 'p003'],
-    learnedAt: '2024-07'
+    learnedAt: '2024-07',
   },
   {
     id: 's034',
@@ -311,7 +311,7 @@ export const skills: Skill[] = [
     proficiency: 3,
     icon: 'log',
     projects: ['p001', 'p002', 'p003'],
-    learnedAt: '2024-07'
+    learnedAt: '2024-07',
   },
   {
     id: 's035',
@@ -320,7 +320,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'performance',
     projects: ['p001', 'p002', 'p003'],
-    learnedAt: '2024-04'
+    learnedAt: '2024-04',
   },
   {
     id: 's036',
@@ -329,7 +329,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'debug',
     projects: ['p001', 'p002', 'p003'],
-    learnedAt: '2024-06'
+    learnedAt: '2024-06',
   },
   // 实时通信
   {
@@ -339,7 +339,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'websocket',
     projects: ['p004'],
-    learnedAt: '2024-08'
+    learnedAt: '2024-08',
   },
   {
     id: 's038',
@@ -348,7 +348,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'sse',
     projects: ['p001', 'p005', 'p006', 'p007'],
-    learnedAt: '2025-03'
+    learnedAt: '2025-03',
   },
   {
     id: 's039',
@@ -357,7 +357,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'hls',
     projects: ['p001'],
-    learnedAt: '2025-02'
+    learnedAt: '2025-02',
   },
   {
     id: 's040',
@@ -366,7 +366,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'flv',
     projects: ['p002'],
-    learnedAt: '2024-05'
+    learnedAt: '2024-05',
   },
   {
     id: 's041',
@@ -375,7 +375,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'srs',
     projects: ['p001'],
-    learnedAt: '2025-02'
+    learnedAt: '2025-02',
   },
   {
     id: 's042',
@@ -384,7 +384,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'ffmpeg',
     projects: ['p001'],
-    learnedAt: '2025-02'
+    learnedAt: '2025-02',
   },
   // 样式方案
   {
@@ -394,7 +394,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'unocss',
     projects: [],
-    learnedAt: '2024-01'
+    learnedAt: '2024-01',
   },
   {
     id: 's044',
@@ -403,7 +403,7 @@ export const skills: Skill[] = [
     proficiency: 4,
     icon: 'tailwind',
     projects: [],
-    learnedAt: '2023-12'
+    learnedAt: '2023-12',
   },
   {
     id: 's045',
@@ -412,7 +412,7 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'component',
     projects: [],
-    learnedAt: '2023-12'
+    learnedAt: '2023-12',
   },
   {
     id: 's046',
@@ -421,59 +421,59 @@ export const skills: Skill[] = [
     proficiency: 5,
     icon: 'engineering',
     projects: [],
-    learnedAt: '2023-12'
-  }
-];
+    learnedAt: '2023-12',
+  },
+]
 
 export const skillCategories: SkillCategory[] = [
   {
     id: 'sc001',
     name: '前端核心',
     icon: 'frontend',
-    skills: skills.filter(s => s.category === '前端核心')
+    skills: skills.filter(s => s.category === '前端核心'),
   },
   {
     id: 'sc002',
     name: '数据可视化',
     icon: 'visualization',
-    skills: skills.filter(s => s.category === '数据可视化')
+    skills: skills.filter(s => s.category === '数据可视化'),
   },
   {
     id: 'sc003',
     name: '地图&GIS',
     icon: 'map',
-    skills: skills.filter(s => s.category === '地图&GIS')
+    skills: skills.filter(s => s.category === '地图&GIS'),
   },
   {
     id: 'sc004',
     name: 'AI&大模型',
     icon: 'ai',
-    skills: skills.filter(s => s.category === 'AI&大模型')
+    skills: skills.filter(s => s.category === 'AI&大模型'),
   },
   {
     id: 'sc005',
     name: '后端开发',
     icon: 'backend',
-    skills: skills.filter(s => s.category === '后端开发')
+    skills: skills.filter(s => s.category === '后端开发'),
   },
   {
     id: 'sc006',
     name: '工程化工具',
     icon: 'tools',
-    skills: skills.filter(s => s.category === '工程化工具')
+    skills: skills.filter(s => s.category === '工程化工具'),
   },
   {
     id: 'sc007',
     name: '实时通信',
     icon: 'realtime',
-    skills: skills.filter(s => s.category === '实时通信')
+    skills: skills.filter(s => s.category === '实时通信'),
   },
   {
     id: 'sc008',
     name: '样式方案',
     icon: 'style',
-    skills: skills.filter(s => s.category === '样式方案')
-  }
-];
+    skills: skills.filter(s => s.category === '样式方案'),
+  },
+]
 
-export default skills;
+export default skills

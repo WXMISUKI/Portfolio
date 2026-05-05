@@ -5,7 +5,8 @@
         <span class="contact-kicker">Contact</span>
         <h1 class="section-title">联系我</h1>
         <p class="section-subtitle">
-          当前以求职沟通与技术交流为主。为了保证信息真实可靠，联系方式、简历与 GitHub 都会直接提供正式访问路径。
+          当前以求职沟通与技术交流为主。为了保证信息真实可靠，联系方式、简历与 GitHub
+          都会直接提供正式访问路径。
         </p>
       </div>
     </section>
@@ -46,8 +47,16 @@
           <SectionTitle title="快速入口" description="适合 HR、面试官和合作方快速浏览" />
           <div class="quick-links">
             <a href="/projects" class="quick-link">查看项目展示</a>
-            <a href="/resume.pdf" class="quick-link" target="_blank" rel="noopener noreferrer">查看简历 PDF</a>
-            <a :href="profile.contact.github" class="quick-link" target="_blank" rel="noopener noreferrer">访问 GitHub</a>
+            <a href="/resume.pdf" class="quick-link" target="_blank" rel="noopener noreferrer"
+              >查看简历 PDF</a
+            >
+            <a
+              :href="profile.contact.github"
+              class="quick-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              >访问 GitHub</a
+            >
           </div>
         </Card>
       </div>
@@ -56,11 +65,11 @@
 </template>
 
 <script setup lang="ts">
-import { Card } from '@/components/ui';
-import SectionTitle from '@/components/common/SectionTitle.vue';
-import ContactCard from '@/components/common/ContactCard.vue';
-import ContactForm from '@/components/common/ContactForm.vue';
-import profile from '@/assets/data/profile';
+import { Card } from '@/components/ui'
+import SectionTitle from '@/components/common/SectionTitle.vue'
+import ContactCard from '@/components/common/ContactCard.vue'
+import ContactForm from '@/components/common/ContactForm.vue'
+import profile from '@/assets/data/profile'
 </script>
 
 <style scoped>

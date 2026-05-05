@@ -5,10 +5,7 @@
       <span class="skill-level">{{ level }}%</span>
     </div>
     <div class="skill-bar">
-      <div
-        class="skill-fill"
-        :style="{ width: level + '%' }"
-      ></div>
+      <div class="skill-fill" :style="{ width: level + '%' }"></div>
     </div>
     <div class="skill-stars">
       <svg
@@ -21,7 +18,9 @@
         stroke="currentColor"
         stroke-width="2"
       >
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        <polygon
+          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+        />
       </svg>
     </div>
   </div>
@@ -29,11 +28,11 @@
 
 <script setup lang="ts">
 interface Props {
-  name: string;
-  level: number; // 0-100
+  name: string
+  level: number // 0-100
 }
 
-defineProps<Props>();
+defineProps<Props>()
 </script>
 
 <style scoped>
@@ -123,15 +122,15 @@ defineProps<Props>();
   .skill-name {
     font-size: var(--font-size-sm);
   }
-  
+
   .skill-level {
     font-size: 0.75rem;
   }
-  
+
   .skill-bar {
     height: 6px;
   }
-  
+
   .star-icon {
     width: 14px;
     height: 14px;

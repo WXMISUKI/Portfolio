@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="罗雍来作品集分享图">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="60%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#4F46E5" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="995" cy="120" r="140" fill="#06B6D4" opacity="0.12" />
+  <circle cx="1080" cy="520" r="180" fill="#4F46E5" opacity="0.12" />
+  <rect x="84" y="86" width="180" height="10" rx="5" fill="url(#accent)" />
+  <text x="84" y="190" fill="#E2E8F0" font-size="76" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">
+    罗雍来
+  </text>
+  <text x="84" y="272" fill="#06B6D4" font-size="42" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-weight="600">
+    前端工程专家 · AI 全栈开发者
+  </text>
+  <text x="84" y="354" fill="#94A3B8" font-size="28" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif">
+    政企复杂业务系统 · GIS · 视频流低延迟优化 · 智能体全栈落地
+  </text>
+  <rect x="84" y="420" width="240" height="64" rx="32" fill="url(#accent)" />
+  <text x="124" y="462" fill="#020617" font-size="30" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">
+    Portfolio
+  </text>
+  <text x="84" y="554" fill="#64748B" font-size="24" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif">
+    https://portfolio-beta-ruddy-39.vercel.app
+  </text>
+</svg>

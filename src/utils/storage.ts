@@ -7,10 +7,10 @@ export const storage = {
    */
   set<T>(key: string, value: T): void {
     try {
-      const serialized = JSON.stringify(value);
-      localStorage.setItem(key, serialized);
+      const serialized = JSON.stringify(value)
+      localStorage.setItem(key, serialized)
     } catch (error) {
-      console.error('Failed to set storage:', error);
+      console.error('Failed to set storage:', error)
     }
   },
 
@@ -19,14 +19,14 @@ export const storage = {
    */
   get<T>(key: string, defaultValue?: T): T | null {
     try {
-      const item = localStorage.getItem(key);
+      const item = localStorage.getItem(key)
       if (item === null) {
-        return defaultValue ?? null;
+        return defaultValue ?? null
       }
-      return JSON.parse(item) as T;
+      return JSON.parse(item) as T
     } catch (error) {
-      console.error('Failed to get storage:', error);
-      return defaultValue ?? null;
+      console.error('Failed to get storage:', error)
+      return defaultValue ?? null
     }
   },
 
@@ -35,9 +35,9 @@ export const storage = {
    */
   remove(key: string): void {
     try {
-      localStorage.removeItem(key);
+      localStorage.removeItem(key)
     } catch (error) {
-      console.error('Failed to remove storage:', error);
+      console.error('Failed to remove storage:', error)
     }
   },
 
@@ -46,9 +46,9 @@ export const storage = {
    */
   clear(): void {
     try {
-      localStorage.clear();
+      localStorage.clear()
     } catch (error) {
-      console.error('Failed to clear storage:', error);
+      console.error('Failed to clear storage:', error)
     }
   },
 
@@ -57,13 +57,13 @@ export const storage = {
    */
   has(key: string): boolean {
     try {
-      return localStorage.getItem(key) !== null;
+      return localStorage.getItem(key) !== null
     } catch (error) {
-      console.error('Failed to check storage:', error);
-      return false;
+      console.error('Failed to check storage:', error)
+      return false
     }
   },
-};
+}
 
 /**
  * 会话存储工具
@@ -74,10 +74,10 @@ export const sessionStorage = {
    */
   set<T>(key: string, value: T): void {
     try {
-      const serialized = JSON.stringify(value);
-      window.sessionStorage.setItem(key, serialized);
+      const serialized = JSON.stringify(value)
+      window.sessionStorage.setItem(key, serialized)
     } catch (error) {
-      console.error('Failed to set session storage:', error);
+      console.error('Failed to set session storage:', error)
     }
   },
 
@@ -86,14 +86,14 @@ export const sessionStorage = {
    */
   get<T>(key: string, defaultValue?: T): T | null {
     try {
-      const item = window.sessionStorage.getItem(key);
+      const item = window.sessionStorage.getItem(key)
       if (item === null) {
-        return defaultValue ?? null;
+        return defaultValue ?? null
       }
-      return JSON.parse(item) as T;
+      return JSON.parse(item) as T
     } catch (error) {
-      console.error('Failed to get session storage:', error);
-      return defaultValue ?? null;
+      console.error('Failed to get session storage:', error)
+      return defaultValue ?? null
     }
   },
 
@@ -102,9 +102,9 @@ export const sessionStorage = {
    */
   remove(key: string): void {
     try {
-      window.sessionStorage.removeItem(key);
+      window.sessionStorage.removeItem(key)
     } catch (error) {
-      console.error('Failed to remove session storage:', error);
+      console.error('Failed to remove session storage:', error)
     }
   },
 
@@ -113,9 +113,9 @@ export const sessionStorage = {
    */
   clear(): void {
     try {
-      window.sessionStorage.clear();
+      window.sessionStorage.clear()
     } catch (error) {
-      console.error('Failed to clear session storage:', error);
+      console.error('Failed to clear session storage:', error)
     }
   },
-};
+}

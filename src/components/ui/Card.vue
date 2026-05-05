@@ -5,13 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 interface Props {
-  variant?: 'default' | 'elevated' | 'outlined';
-  hoverable?: boolean;
-  clickable?: boolean;
-  padding?: 'none' | 'small' | 'medium' | 'large';
+  variant?: 'default' | 'elevated' | 'outlined'
+  hoverable?: boolean
+  clickable?: boolean
+  padding?: 'none' | 'small' | 'medium' | 'large'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -19,11 +19,11 @@ const props = withDefaults(defineProps<Props>(), {
   hoverable: false,
   clickable: false,
   padding: 'medium',
-});
+})
 
 const emit = defineEmits<{
-  click: [event: MouseEvent];
-}>();
+  click: [event: MouseEvent]
+}>()
 
 const cardClasses = computed(() => [
   'card',
@@ -33,13 +33,13 @@ const cardClasses = computed(() => [
     'card-hoverable': props.hoverable,
     'card-clickable': props.clickable,
   },
-]);
+])
 
 const handleClick = (event: MouseEvent) => {
   if (props.clickable) {
-    emit('click', event);
+    emit('click', event)
   }
-};
+}
 </script>
 
 <style scoped>
@@ -124,7 +124,7 @@ html.light .card-clickable:hover {
   .card {
     border-radius: var(--radius-lg);
   }
-  
+
   .card-large {
     padding: var(--spacing-lg);
   }

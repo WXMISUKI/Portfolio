@@ -14,7 +14,7 @@
         </Button>
       </div>
     </div>
-    
+
     <div class="filter-section">
       <h4 class="filter-title">技术栈</h4>
       <div class="filter-tags">
@@ -32,7 +32,7 @@
         </Tag>
       </div>
     </div>
-    
+
     <div class="filter-section filter-search">
       <h4 class="filter-title">搜索</h4>
       <Input
@@ -43,114 +43,110 @@
         clearable
       />
     </div>
-    
+
     <div v-if="hasFilters" class="filter-actions">
-      <Button
-        variant="ghost"
-        size="small"
-        @click="clearFilters"
-      >
-        清除筛选
-      </Button>
+      <Button variant="ghost" size="small" @click="clearFilters"> 清除筛选 </Button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
-import { Button, Tag, Input } from '@/components/ui';
+import { ref, computed, watch } from 'vue'
+import { Button, Tag, Input } from '@/components/ui'
 
 interface Category {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 interface Props {
-  categories: Category[];
-  techStacks: string[];
-  modelValue?: FilterOptions;
+  categories: Category[]
+  techStacks: string[]
+  modelValue?: FilterOptions
 }
 
 interface FilterOptions {
-  category?: string;
-  techStack?: string[];
-  search?: string;
+  category?: string
+  techStack?: string[]
+  search?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: () => ({
     category: 'all',
     techStack: [],
-    search: ''
-  })
-});
+    search: '',
+  }),
+})
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: FilterOptions): void;
-}>();
+  (e: 'update:modelValue', value: FilterOptions): void
+}>()
 
-const selectedCategory = ref(props.modelValue?.category || 'all');
-const selectedTechs = ref<string[]>(props.modelValue?.techStack || []);
-const searchQuery = ref(props.modelValue?.search || '');
+const selectedCategory = ref(props.modelValue?.category || 'all')
+const selectedTechs = ref<string[]>(props.modelValue?.techStack || [])
+const searchQuery = ref(props.modelValue?.search || '')
 
 watch(
   () => props.modelValue,
-  (value) => {
-    selectedCategory.value = value?.category || 'all';
-    selectedTechs.value = value?.techStack || [];
-    searchQuery.value = value?.search || '';
+  value => {
+    selectedCategory.value = value?.category || 'all'
+    selectedTechs.value = value?.techStack || []
+    searchQuery.value = value?.search || ''
   },
   { deep: true }
-);
+)
 
 watch(searchQuery, () => {
-  emitFilters();
-});
+  emitFilters()
+})
 
 const hasFilters = computed(() => {
-  return selectedCategory.value !== 'all' || 
-         selectedTechs.value.length > 0 || 
-         searchQuery.value.length > 0;
-});
+  return (
+    selectedCategory.value !== 'all' ||
+    selectedTechs.value.length > 0 ||
+    searchQuery.value.length > 0
+  )
+})
 
 const selectCategory = (categoryId: string) => {
-  selectedCategory.value = categoryId;
-  emitFilters();
-};
+  selectedCategory.value = categoryId
+  emitFilters()
+}
 
 const toggleTech = (tech: string) => {
-  const index = selectedTechs.value.indexOf(tech);
+  const index = selectedTechs.value.indexOf(tech)
   if (index > -1) {
-    selectedTechs.value.splice(index, 1);
+    selectedTechs.value.splice(index, 1)
   } else {
-    selectedTechs.value.push(tech);
+    selectedTechs.value.push(tech)
   }
-  emitFilters();
-};
+  emitFilters()
+}
 
 const removeTech = (tech: string) => {
-  const index = selectedTechs.value.indexOf(tech);
+  const index = selectedTechs.value.indexOf(tech)
   if (index > -1) {
-    selectedTechs.value.splice(index, 1);
-    emitFilters();
+    selectedTechs.value.splice(index, 1)
+    emitFilters()
   }
-};
+}
 
 const clearFilters = () => {
-  selectedCategory.value = 'all';
-  selectedTechs.value = [];
-  searchQuery.value = '';
-  emitFilters();
-};
+  selectedCategory.value = 'all'
+  selectedTechs.value = []
+  searchQuery.value = ''
+  emitFilters()
+}
 
 const emitFilters = () => {
   const filters: FilterOptions = {
     category: selectedCategory.value === 'all' ? undefined : selectedCategory.value,
     techStack: selectedTechs.value,
     search: searchQuery.value,
-  };
-  emit('update:modelValue', filters);
-};
+  }
+  emit('update:modelValue', filters)
+}
 </script>
 
 <style scoped>
@@ -207,15 +203,15 @@ const emitFilters = () => {
   .project-filter {
     padding: var(--spacing-md);
   }
-  
+
   .filter-buttons {
     gap: var(--spacing-xs);
   }
-  
+
   .filter-actions {
     justify-content: stretch;
   }
-  
+
   .filter-actions .button {
     width: 100%;
   }

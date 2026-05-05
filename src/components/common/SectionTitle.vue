@@ -13,15 +13,15 @@
 
 <script setup lang="ts">
 interface Props {
-  title: string;
-  description?: string;
-  badge?: string;
-  align?: 'left' | 'center' | 'right';
+  title: string
+  description?: string
+  badge?: string
+  align?: 'left' | 'center' | 'right'
 }
 
 withDefaults(defineProps<Props>(), {
   align: 'left',
-});
+})
 </script>
 
 <style scoped>
@@ -112,17 +112,17 @@ html.dark .title-badge {
   .section-title {
     margin-bottom: var(--spacing-2xl);
   }
-  
+
   .title {
     font-size: var(--font-size-3xl);
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .title-badge {
     margin-top: 8px;
   }
-  
+
   .description {
     font-size: var(--font-size-base);
   }

@@ -6,7 +6,8 @@
           <span class="projects-kicker">Project Portfolio</span>
           <h1 class="section-title">项目经验</h1>
           <p class="section-subtitle">
-            以 AI 智能体项目为优先展示，同时保留政企复杂业务系统的工程交付能力。每个项目都尽量给出职责、方案和可量化成果。
+            以 AI
+            智能体项目为优先展示，同时保留政企复杂业务系统的工程交付能力。每个项目都尽量给出职责、方案和可量化成果。
           </p>
         </div>
 
@@ -71,67 +72,67 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue';
-import type { Project, ProjectFilter } from '@/types/project';
-import { useProjectStore } from '@/store';
-import ProjectCard from '@/components/common/ProjectCard.vue';
-import ProjectFilterPanel from '@/components/common/ProjectFilter.vue';
-import ProjectDetailPanel from '@/components/common/ProjectDetailPanel.vue';
+import { computed, onMounted, ref, watch } from 'vue'
+import type { Project, ProjectFilter } from '@/types/project'
+import { useProjectStore } from '@/store'
+import ProjectCard from '@/components/common/ProjectCard.vue'
+import ProjectFilterPanel from '@/components/common/ProjectFilter.vue'
+import ProjectDetailPanel from '@/components/common/ProjectDetailPanel.vue'
 
-const projectStore = useProjectStore();
-const selectedProject = ref<Project | null>(null);
+const projectStore = useProjectStore()
+const selectedProject = ref<Project | null>(null)
 const filters = ref<ProjectFilter>({
   category: undefined,
   techStack: [],
   search: '',
-});
+})
 
 const categories = [
   { id: 'all', name: '全部项目' },
   { id: 'ai', name: 'AI 项目' },
   { id: 'government', name: '政企项目' },
-];
+]
 
 watch(
   filters,
-  (value) => {
-    projectStore.setFilter(value);
+  value => {
+    projectStore.setFilter(value)
   },
   { deep: true }
-);
+)
 
 onMounted(async () => {
   if (!projectStore.projects.length) {
-    await projectStore.loadProjects();
+    await projectStore.loadProjects()
   }
-});
+})
 
 const sortedProjects = computed(() => {
   const priorityMap: Record<Project['category'], number> = {
     ai: 0,
     government: 1,
     personal: 2,
-  };
+  }
 
   return [...projectStore.filteredProjects].sort((a, b) => {
     if (priorityMap[a.category] !== priorityMap[b.category]) {
-      return priorityMap[a.category] - priorityMap[b.category];
+      return priorityMap[a.category] - priorityMap[b.category]
     }
 
     if (a.featured !== b.featured) {
-      return Number(b.featured) - Number(a.featured);
+      return Number(b.featured) - Number(a.featured)
     }
 
-    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-  });
-});
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+  })
+})
 
-const demoCount = computed(() => projectStore.projects.filter((item) => item.demo).length);
-const featuredCount = computed(() => projectStore.projects.filter((item) => item.featured).length);
+const demoCount = computed(() => projectStore.projects.filter(item => item.demo).length)
+const featuredCount = computed(() => projectStore.projects.filter(item => item.featured).length)
 
 const openDetail = (project: Project) => {
-  selectedProject.value = project;
-};
+  selectedProject.value = project
+}
 </script>
 
 <style scoped>

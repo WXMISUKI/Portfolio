@@ -19,10 +19,20 @@
 
           <div class="hero-actions">
             <RouterLink to="/projects" class="hero-link primary">查看项目</RouterLink>
-            <a href="/resume.pdf" class="hero-link secondary" target="_blank" rel="noopener noreferrer">
+            <a
+              href="/resume.pdf"
+              class="hero-link secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               查看简历
             </a>
-            <a :href="profile.contact.github" class="hero-link ghost" target="_blank" rel="noopener noreferrer">
+            <a
+              :href="profile.contact.github"
+              class="hero-link ghost"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               GitHub
             </a>
           </div>
@@ -33,7 +43,8 @@
             <span class="panel-label">核心定位</span>
             <h3>{{ profile.title }}</h3>
             <p>
-              聚焦政企复杂业务系统、GIS、视频流低延迟优化与 AI 智能体全栈落地，强调真实项目交付与性能结果。
+              聚焦政企复杂业务系统、GIS、视频流低延迟优化与 AI
+              智能体全栈落地，强调真实项目交付与性能结果。
             </p>
           </div>
 
@@ -68,7 +79,10 @@
 
     <section class="home-section">
       <div class="container-custom">
-        <SectionTitle title="精选项目" description="优先展示已上线的 AI 项目，并保留能体现工程深度的政企项目。" />
+        <SectionTitle
+          title="精选项目"
+          description="优先展示已上线的 AI 项目，并保留能体现工程深度的政企项目。"
+        />
 
         <div class="featured-grid">
           <article v-for="project in featuredProjects" :key="project.id" class="featured-card">
@@ -105,48 +119,48 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { Badge, Tag } from '@/components/ui';
-import SectionTitle from '@/components/common/SectionTitle.vue';
-import profile from '@/assets/data/profile';
-import { useProjectStore } from '@/store';
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { Badge, Tag } from '@/components/ui'
+import SectionTitle from '@/components/common/SectionTitle.vue'
+import profile from '@/assets/data/profile'
+import { useProjectStore } from '@/store'
 
-const projectStore = useProjectStore();
-const heroTags = ['政企项目', 'GIS', '视频流', '性能优化', 'AI 智能体', '全栈开发'];
-const words = ['前端工程专家', 'AI 全栈开发者', '智能体开发工程师'];
+const projectStore = useProjectStore()
+const heroTags = ['政企项目', 'GIS', '视频流', '性能优化', 'AI 智能体', '全栈开发']
+const words = ['前端工程专家', 'AI 全栈开发者', '智能体开发工程师']
 
-const wordIndex = ref(0);
-const typedWords = computed(() => words[wordIndex.value]);
-let typeInterval: number | null = null;
+const wordIndex = ref(0)
+const typedWords = computed(() => words[wordIndex.value])
+let typeInterval: number | null = null
 
 const featuredProjects = computed(() =>
   [...projectStore.projects]
-    .filter((project) => project.featured)
+    .filter(project => project.featured)
     .sort((a, b) => {
       if (a.category !== b.category) {
-        return a.category === 'ai' ? -1 : 1;
+        return a.category === 'ai' ? -1 : 1
       }
 
-      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
     })
     .slice(0, 4)
-);
+)
 
 onMounted(async () => {
   if (!projectStore.projects.length) {
-    await projectStore.loadProjects();
+    await projectStore.loadProjects()
   }
 
   typeInterval = window.setInterval(() => {
-    wordIndex.value = (wordIndex.value + 1) % words.length;
-  }, 2600);
-});
+    wordIndex.value = (wordIndex.value + 1) % words.length
+  }, 2600)
+})
 
 onUnmounted(() => {
   if (typeInterval) {
-    clearInterval(typeInterval);
+    clearInterval(typeInterval)
   }
-});
+})
 </script>
 
 <style scoped>
@@ -175,8 +189,7 @@ onUnmounted(() => {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-2xl);
   background:
-    linear-gradient(150deg, rgba(6, 182, 212, 0.12), transparent 42%),
-    rgba(15, 23, 42, 0.6);
+    linear-gradient(150deg, rgba(6, 182, 212, 0.12), transparent 42%), rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(12px);
 }
 
@@ -344,10 +357,12 @@ onUnmounted(() => {
 }
 
 @keyframes blink {
-  0%, 50% {
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+  51%,
+  100% {
     opacity: 0;
   }
 }

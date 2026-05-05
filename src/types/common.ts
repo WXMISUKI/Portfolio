@@ -1,30 +1,30 @@
 export interface SocialLink {
-  name: string;
-  icon: string;
-  url: string;
+  name: string
+  icon: string
+  url: string
 }
 
 export interface NavLink {
-  path: string;
-  name: string;
+  path: string
+  name: string
 }
 
 export interface NavigationItem {
-  id: string;
-  label: string;
-  path: string;
-  icon?: string;
+  id: string
+  label: string
+  path: string
+  icon?: string
 }
 
 export interface Category {
-  id: string;
-  name: string;
-  count?: number;
+  id: string
+  name: string
+  count?: number
 }
 
 export interface Metric {
-  label: string;
-  value: number | string;
-  suffix?: string;
-  prefix?: string;
+  label: string
+  value: number | string
+  suffix?: string
+  prefix?: string
 }

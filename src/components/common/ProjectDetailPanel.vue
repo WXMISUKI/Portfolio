@@ -114,7 +114,11 @@
           <div v-if="project.challenges.length" class="project-detail-section">
             <h3>难点与解决方案</h3>
             <div class="challenge-list">
-              <article v-for="challenge in project.challenges" :key="challenge.problem" class="challenge-item">
+              <article
+                v-for="challenge in project.challenges"
+                :key="challenge.problem"
+                class="challenge-item"
+              >
                 <h4>{{ challenge.problem }}</h4>
                 <p><strong>方案：</strong>{{ challenge.solution }}</p>
                 <p><strong>结果：</strong>{{ challenge.result }}</p>
@@ -147,78 +151,80 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onUnmounted, ref, watch } from 'vue';
-import type { Project } from '@/types/project';
-import { Badge, Button, Tag } from '@/components/ui';
+import { computed, onUnmounted, ref, watch } from 'vue'
+import type { Project } from '@/types/project'
+import { Badge, Button, Tag } from '@/components/ui'
 
 interface Props {
-  project: Project | null;
+  project: Project | null
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  close: [];
-}>();
+  close: []
+}>()
 
-const titleId = 'project-detail-title';
-const activeImage = ref(0);
+const titleId = 'project-detail-title'
+const activeImage = ref(0)
 
 watch(
   () => props.project?.id,
-  (projectId) => {
-    activeImage.value = 0;
+  projectId => {
+    activeImage.value = 0
 
     if (typeof document !== 'undefined') {
-      document.body.style.overflow = projectId ? 'hidden' : '';
+      document.body.style.overflow = projectId ? 'hidden' : ''
     }
   }
-);
+)
 
 const handleKeydown = (event: KeyboardEvent) => {
   if (event.key === 'Escape' && props.project) {
-    emit('close');
+    emit('close')
   }
-};
+}
 
 if (typeof window !== 'undefined') {
-  window.addEventListener('keydown', handleKeydown);
+  window.addEventListener('keydown', handleKeydown)
 }
 
 onUnmounted(() => {
   if (typeof document !== 'undefined') {
-    document.body.style.overflow = '';
+    document.body.style.overflow = ''
   }
 
   if (typeof window !== 'undefined') {
-    window.removeEventListener('keydown', handleKeydown);
+    window.removeEventListener('keydown', handleKeydown)
   }
-});
+})
 
-const validScreenshots = computed(() => props.project?.screenshots.filter(Boolean) ?? []);
-const currentImage = computed(() => validScreenshots.value[activeImage.value] ?? validScreenshots.value[0] ?? '');
+const validScreenshots = computed(() => props.project?.screenshots.filter(Boolean) ?? [])
+const currentImage = computed(
+  () => validScreenshots.value[activeImage.value] ?? validScreenshots.value[0] ?? ''
+)
 
 const categoryLabel = computed(() => {
   switch (props.project?.category) {
     case 'ai':
-      return 'AI 项目';
+      return 'AI 项目'
     case 'government':
-      return '政企项目';
+      return '政企项目'
     default:
-      return '个人项目';
+      return '个人项目'
   }
-});
+})
 
 const categoryVariant = computed(() => {
   switch (props.project?.category) {
     case 'ai':
-      return 'success';
+      return 'success'
     case 'government':
-      return 'primary';
+      return 'primary'
     default:
-      return 'warning';
+      return 'warning'
   }
-});
+})
 
 const metricLabelMap: Record<string, string> = {
   performance: '性能提升',
@@ -227,11 +233,11 @@ const metricLabelMap: Record<string, string> = {
   commits: '提交记录',
   localModels: '本地模型',
   improvement: '关键成果',
-};
+}
 
 const metricEntries = computed(() => {
   if (!props.project?.metrics) {
-    return [];
+    return []
   }
 
   return Object.entries(props.project.metrics)
@@ -239,8 +245,8 @@ const metricEntries = computed(() => {
     .map(([key, value]) => ({
       label: metricLabelMap[key] ?? key,
       value: value as string,
-    }));
-});
+    }))
+})
 </script>
 
 <style scoped>

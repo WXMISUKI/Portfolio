@@ -1,5 +1,6 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
-import { useUIStore } from '@/store';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { useUIStore } from '@/store'
+import { SITE_DESCRIPTION, SITE_NAME, SITE_OG_IMAGE, SITE_URL } from '@/config/site'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -47,41 +48,69 @@ const routes: RouteRecordRaw[] = [
       description: '联系方式和合作机会',
     },
   },
-];
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(_to, _from, savedPosition) {
-    return savedPosition || { top: 0, behavior: 'smooth' };
+    return savedPosition || { top: 0, behavior: 'smooth' }
   },
-});
+})
 
 router.beforeEach((to, _from, next) => {
-  document.title = `${to.meta.title} - 罗雍来`;
+  const pageTitle = String(to.meta.title || SITE_NAME)
+  const description = String(to.meta.description || SITE_DESCRIPTION)
+  const canonicalUrl = to.path === '/' ? `${SITE_URL}/` : `${SITE_URL}${to.path}`
 
-  const description = String(to.meta.description || '罗雍来 - 前端工程与 AI 全栈开发者作品集');
-  const metaDescription = document.querySelector('meta[name="description"]');
-  if (metaDescription) {
-    metaDescription.setAttribute('content', description);
+  document.title = `${pageTitle} - 罗雍来`
+
+  const setMeta = (selector: string, content: string) => {
+    const element = document.querySelector(selector)
+    if (element) {
+      element.setAttribute('content', content)
+    }
   }
 
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) {
-    ogTitle.setAttribute('content', `${to.meta.title} - 罗雍来`);
+  setMeta('meta[name="description"]', description)
+  setMeta('meta[property="og:title"]', `${pageTitle} - 罗雍来`)
+  setMeta('meta[property="og:description"]', description)
+  setMeta('meta[property="og:url"]', canonicalUrl)
+  setMeta('meta[property="og:image"]', SITE_OG_IMAGE)
+  setMeta('meta[name="twitter:title"]', `${pageTitle} - 罗雍来`)
+  setMeta('meta[name="twitter:description"]', description)
+  setMeta('meta[name="twitter:image"]', SITE_OG_IMAGE)
+
+  const canonicalLink = document.querySelector('link[rel="canonical"]')
+  if (canonicalLink) {
+    canonicalLink.setAttribute('href', canonicalUrl)
   }
 
-  const ogDescription = document.querySelector('meta[property="og:description"]');
-  if (ogDescription) {
-    ogDescription.setAttribute('content', description);
+  const structuredDataId = 'site-structured-data'
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: SITE_DESCRIPTION,
+    inLanguage: 'zh-CN',
   }
 
-  const uiStore = useUIStore();
+  let script = document.getElementById(structuredDataId) as HTMLScriptElement | null
+  if (!script) {
+    script = document.createElement('script')
+    script.id = structuredDataId
+    script.type = 'application/ld+json'
+    document.head.appendChild(script)
+  }
+  script.textContent = JSON.stringify(structuredData)
+
+  const uiStore = useUIStore()
   if (uiStore.isMobileMenuOpen) {
-    uiStore.closeMobileMenu();
+    uiStore.closeMobileMenu()
   }
 
-  next();
-});
+  next()
+})
 
-export default router;
+export default router

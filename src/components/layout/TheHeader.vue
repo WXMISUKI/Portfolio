@@ -26,20 +26,11 @@
           </RouterLink>
         </nav>
 
-        <a
-          class="header-resume-link"
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a class="header-resume-link" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
           简历
         </a>
 
-        <button
-          class="mobile-menu-btn"
-          @click="toggleMobileMenu"
-          aria-label="切换菜单"
-        >
+        <button class="mobile-menu-btn" @click="toggleMobileMenu" aria-label="切换菜单">
           <span class="hamburger" :class="{ open: isMobileMenuOpen }">
             <span></span>
             <span></span>
@@ -51,29 +42,37 @@
 
     <!-- 移动端菜单 -->
     <transition name="slide">
-      <div v-if="isMobileMenuOpen" class="mobile-menu">
-        <RouterLink
-          v-for="item in navItems"
-          :key="item.path"
-          :to="item.path"
-          class="mobile-nav-link"
+      <div v-if="isMobileMenuOpen" class="mobile-menu-layer">
+        <button
+          type="button"
+          class="mobile-menu-overlay"
+          aria-label="关闭移动端菜单"
           @click="closeMobileMenu"
-        >
-          {{ item.name }}
-        </RouterLink>
+        ></button>
+        <div class="mobile-menu">
+          <RouterLink
+            v-for="item in navItems"
+            :key="item.path"
+            :to="item.path"
+            class="mobile-nav-link"
+            @click="closeMobileMenu"
+          >
+            {{ item.name }}
+          </RouterLink>
+        </div>
       </div>
     </transition>
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { useUIStore } from '@/store';
-import ThemeToggle from '@/components/ui/ThemeToggle.vue';
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { useUIStore } from '@/store'
+import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 
-const route = useRoute();
-const uiStore = useUIStore();
+const route = useRoute()
+const uiStore = useUIStore()
 
 const navItems = ref([
   { path: '/', name: '首页' },
@@ -81,21 +80,33 @@ const navItems = ref([
   { path: '/projects', name: '项目经验' },
   { path: '/skills', name: '技术栈' },
   { path: '/contact', name: '联系我' },
-]);
+])
 
-const isMobileMenuOpen = computed(() => uiStore.isMobileMenuOpen);
+const isMobileMenuOpen = computed(() => uiStore.isMobileMenuOpen)
 
 const isActive = (path: string) => {
-  return route.path === path;
-};
+  return route.path === path
+}
 
 const toggleMobileMenu = () => {
-  uiStore.toggleMobileMenu();
-};
+  uiStore.toggleMobileMenu()
+}
 
 const closeMobileMenu = () => {
-  uiStore.closeMobileMenu();
-};
+  uiStore.closeMobileMenu()
+}
+
+watch(
+  isMobileMenuOpen,
+  opened => {
+    document.body.style.overflow = opened ? 'hidden' : ''
+  },
+  { immediate: true }
+)
+
+onBeforeUnmount(() => {
+  document.body.style.overflow = ''
+})
 </script>
 
 <style scoped>
@@ -108,8 +119,9 @@ const closeMobileMenu = () => {
   background: var(--color-primary);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
-  transition: background var(--duration-normal) var(--ease-in-out),
-              border-color var(--duration-normal) var(--ease-in-out);
+  transition:
+    background var(--duration-normal) var(--ease-in-out),
+    border-color var(--duration-normal) var(--ease-in-out);
 }
 
 .header-content {
@@ -251,14 +263,32 @@ html.light .logo-text {
 
 .mobile-menu {
   position: absolute;
-  top: 64px;
+  top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
   background: var(--color-primary);
   border-bottom: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: 0;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+}
+
+.mobile-menu-layer {
+  position: fixed;
+  inset: 64px 0 0;
+  z-index: var(--z-dropdown);
+}
+
+.mobile-menu-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.46);
+  border: none;
+  padding: 0;
 }
 
 .mobile-nav-link {
@@ -266,8 +296,9 @@ html.light .logo-text {
   color: var(--color-text);
   text-decoration: none;
   border-bottom: 1px solid var(--color-border);
-  transition: background var(--duration-normal) var(--ease-in-out),
-              color var(--duration-normal) var(--ease-in-out);
+  transition:
+    background var(--duration-normal) var(--ease-in-out),
+    color var(--duration-normal) var(--ease-in-out);
 }
 
 .mobile-nav-link:hover {
@@ -293,7 +324,7 @@ html.light .mobile-nav-link.router-link-active {
 
 .slide-enter-from,
 .slide-leave-to {
-  transform: translateY(-100%);
+  transform: translateY(-12px);
   opacity: 0;
 }
 

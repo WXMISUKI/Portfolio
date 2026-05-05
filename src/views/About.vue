@@ -79,31 +79,31 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Card, Tag } from '@/components/ui';
-import SectionTitle from '@/components/common/SectionTitle.vue';
-import Statistics from '@/components/common/Statistics.vue';
-import Timeline from '@/components/common/Timeline.vue';
-import { profile, timeline, metrics, personalTags, jobInfo } from '@/assets/data/profile';
+import { computed } from 'vue'
+import { Card, Tag } from '@/components/ui'
+import SectionTitle from '@/components/common/SectionTitle.vue'
+import Statistics from '@/components/common/Statistics.vue'
+import Timeline from '@/components/common/Timeline.vue'
+import { profile, timeline, metrics, personalTags, jobInfo } from '@/assets/data/profile'
 
 const displayMetrics = computed(() =>
-  metrics.map((item) => ({
+  metrics.map(item => ({
     label: item.label,
     value: item.value,
     suffix: item.suffix,
   }))
-);
+)
 
 const timelineItems = computed(() =>
-  timeline.flatMap((yearGroup) =>
-    yearGroup.events.map((event) => ({
+  timeline.flatMap(yearGroup =>
+    yearGroup.events.map(event => ({
       date: `${yearGroup.year}.${event.month}`,
       title: event.title,
       description: `${event.role}｜${event.description}`,
       tags: [yearGroup.year, event.role],
     }))
   )
-);
+)
 </script>
 
 <style scoped>
@@ -130,8 +130,7 @@ const timelineItems = computed(() =>
   border: 1px solid var(--color-border);
   border-radius: var(--radius-2xl);
   background:
-    linear-gradient(160deg, rgba(6, 182, 212, 0.08), transparent 44%),
-    rgba(15, 23, 42, 0.56);
+    linear-gradient(160deg, rgba(6, 182, 212, 0.08), transparent 44%), rgba(15, 23, 42, 0.56);
 }
 
 .about-kicker {
