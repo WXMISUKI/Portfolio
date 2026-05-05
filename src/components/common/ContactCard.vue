@@ -167,7 +167,7 @@ const copyValue = async (value: string) => {
   padding: 16px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.38);
+  background: var(--color-surface-soft);
 }
 
 .contact-icon {
@@ -177,7 +177,7 @@ const copyValue = async (value: string) => {
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: rgba(6, 182, 212, 0.12);
+  background: var(--color-surface-inset);
   color: var(--color-accent);
   font-size: 1.2rem;
 }

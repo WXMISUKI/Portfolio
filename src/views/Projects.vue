@@ -158,8 +158,9 @@ const openDetail = (project: Project) => {
 .highlight-card {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-2xl);
-  background: rgba(15, 23, 42, 0.68);
+  background: var(--gradient-surface-panel);
   backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-lg);
 }
 
 .projects-hero-copy {
@@ -248,8 +249,9 @@ const openDetail = (project: Project) => {
   padding: 24px 28px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-2xl);
-  background: rgba(15, 23, 42, 0.54);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-md);
 }
 
 .projects-list-title {

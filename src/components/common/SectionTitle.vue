@@ -26,16 +26,19 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped>
 .section-title {
+  position: relative;
   margin-bottom: var(--spacing-3xl);
   text-align: var(--section-align, left);
 }
 
 .title {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
   gap: 12px;
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
   color: var(--color-text);
   margin-bottom: var(--spacing-md);
   transition: color var(--duration-normal) var(--ease-in-out);
@@ -64,21 +67,35 @@ html.dark .title-badge {
 }
 
 .description {
-  font-size: var(--font-size-lg);
+  font-size: clamp(1rem, 1.1vw, var(--font-size-lg));
   color: var(--color-text-secondary);
   line-height: var(--leading-relaxed);
-  max-width: 800px;
+  max-width: 720px;
   margin: 0 0 var(--spacing-xl);
   transition: color var(--duration-normal) var(--ease-in-out);
 }
 
 .divider {
-  width: 80px;
-  height: 4px;
+  position: relative;
+  width: 96px;
+  height: 5px;
   margin: 0;
   background: var(--gradient-accent);
-  border-radius: 2px;
+  border-radius: 9999px;
+  box-shadow: var(--shadow-accent);
   transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+.divider::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  transform: translateY(-50%);
 }
 
 .section-title[style*='center'] .title {
@@ -115,7 +132,6 @@ html.dark .title-badge {
 
   .title {
     font-size: var(--font-size-3xl);
-    flex-direction: column;
     align-items: flex-start;
   }
 
@@ -125,6 +141,18 @@ html.dark .title-badge {
 
   .description {
     font-size: var(--font-size-base);
+  }
+
+  .section-title[style*='center'] .title,
+  .section-title[style*='center'] .description,
+  .section-title[style*='center'] .divider {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title[style*='right'] .title {
+    justify-content: flex-end;
   }
 }
 </style>

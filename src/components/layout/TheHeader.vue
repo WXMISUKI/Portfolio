@@ -116,19 +116,21 @@ onBeforeUnmount(() => {
   left: 0;
   right: 0;
   z-index: var(--z-sticky);
-  background: var(--color-primary);
+  background: var(--color-surface-strong);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
   transition:
     background var(--duration-normal) var(--ease-in-out),
-    border-color var(--duration-normal) var(--ease-in-out);
+    border-color var(--duration-normal) var(--ease-in-out),
+    box-shadow var(--duration-normal) var(--ease-in-out);
 }
 
 .header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 68px;
   gap: 16px;
 }
 
@@ -176,6 +178,7 @@ html.light .logo-text {
   padding: 10px 14px;
   border-radius: 9999px;
   border: 1px solid var(--color-border);
+  background: var(--color-surface-soft);
   color: var(--color-text);
   transition: all var(--duration-normal) var(--ease-in-out);
 }
@@ -183,30 +186,42 @@ html.light .logo-text {
 .header-resume-link:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-accent);
 }
 
 .nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: var(--radius-full);
   color: var(--color-text);
   text-decoration: none;
   font-weight: 500;
-  transition: color var(--duration-normal) var(--ease-in-out);
+  transition:
+    color var(--duration-normal) var(--ease-in-out),
+    background-color var(--duration-normal) var(--ease-in-out);
   position: relative;
 }
 
 .nav-link:hover {
   color: var(--color-accent);
+  background: var(--color-surface-soft);
 }
 
 .nav-link.active {
   color: var(--color-accent);
+  background: var(--color-surface-soft);
 }
 
 .nav-link.active::after {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
+  bottom: 6px;
+  left: 14px;
+  right: 14px;
   height: 2px;
   background: var(--color-accent);
   animation: slideIn 0.3s ease;
@@ -267,19 +282,19 @@ html.light .logo-text {
   left: 0;
   right: 0;
   z-index: 1;
-  max-height: calc(100vh - 64px);
+  max-height: calc(100vh - 68px);
   overflow-y: auto;
-  background: var(--color-primary);
+  background: var(--color-surface-strong);
   border-bottom: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: 0;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+  box-shadow: var(--shadow-xl);
 }
 
 .mobile-menu-layer {
   position: fixed;
-  inset: 64px 0 0;
+  inset: 68px 0 0;
   z-index: var(--z-dropdown);
 }
 
@@ -302,13 +317,13 @@ html.light .logo-text {
 }
 
 .mobile-nav-link:hover {
-  background: var(--color-background);
+  background: var(--color-surface-soft);
   color: var(--color-accent);
 }
 
 .mobile-nav-link.router-link-active {
   color: var(--color-accent);
-  background: rgba(6, 182, 212, 0.1);
+  background: var(--color-surface-soft);
 }
 
 /* 浅色主题激活链接背景 */

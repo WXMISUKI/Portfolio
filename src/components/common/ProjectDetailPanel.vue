@@ -10,7 +10,7 @@
     <div class="project-detail-panel">
       <div class="project-detail-header">
         <div class="project-detail-title-wrap">
-          <Badge :variant="categoryVariant" size="small">
+          <Badge :variant="categoryVariant" size="small" class="project-detail-badge">
             {{ categoryLabel }}
           </Badge>
           <h2 :id="titleId" class="project-detail-title">{{ project.title }}</h2>
@@ -28,12 +28,23 @@
 
       <div class="project-detail-body">
         <section class="project-detail-gallery">
-          <img
+          <button
             v-if="currentImage"
-            :src="currentImage"
-            :alt="`${project.title} 项目截图`"
-            class="project-detail-cover"
-          />
+            type="button"
+            class="project-detail-preview-trigger"
+            :aria-label="`查看 ${project.title} 项目大图`"
+            @click="openPreview"
+          >
+            <img
+              :src="currentImage"
+              :alt="`${project.title} 项目截图`"
+              class="project-detail-cover"
+            />
+            <span class="project-detail-preview-hint">点击查看大图</span>
+            <span class="project-detail-image-count">
+              {{ activeImage + 1 }} / {{ validScreenshots.length }}
+            </span>
+          </button>
           <div v-else class="project-detail-placeholder">
             <span>暂无可展示截图</span>
           </div>
@@ -147,6 +158,56 @@
         </section>
       </div>
     </div>
+
+    <div
+      v-if="isPreviewOpen && currentImage"
+      class="project-image-viewer"
+      role="dialog"
+      aria-modal="true"
+      :aria-label="`${project.title} 项目截图预览`"
+      @click.self="closePreview"
+    >
+      <button
+        type="button"
+        class="project-image-viewer-close"
+        aria-label="关闭图片预览"
+        @click="closePreview"
+      >
+        ×
+      </button>
+
+      <button
+        v-if="canNavigate"
+        type="button"
+        class="project-image-viewer-nav prev"
+        aria-label="查看上一张图片"
+        @click.stop="showPrevImage"
+      >
+        ‹
+      </button>
+
+      <div class="project-image-viewer-stage" @click.stop>
+        <img
+          :src="currentImage"
+          :alt="`${project.title} 项目大图 ${activeImage + 1}`"
+          class="project-image-viewer-image"
+        />
+        <div class="project-image-viewer-caption">
+          <strong>{{ project.title }}</strong>
+          <span>第 {{ activeImage + 1 }} 张，共 {{ validScreenshots.length }} 张</span>
+        </div>
+      </div>
+
+      <button
+        v-if="canNavigate"
+        type="button"
+        class="project-image-viewer-nav next"
+        aria-label="查看下一张图片"
+        @click.stop="showNextImage"
+      >
+        ›
+      </button>
+    </div>
   </div>
 </template>
 
@@ -167,11 +228,13 @@ const emit = defineEmits<{
 
 const titleId = 'project-detail-title'
 const activeImage = ref(0)
+const isPreviewOpen = ref(false)
 
 watch(
   () => props.project?.id,
   projectId => {
     activeImage.value = 0
+    isPreviewOpen.value = false
 
     if (typeof document !== 'undefined') {
       document.body.style.overflow = projectId ? 'hidden' : ''
@@ -180,8 +243,23 @@ watch(
 )
 
 const handleKeydown = (event: KeyboardEvent) => {
-  if (event.key === 'Escape' && props.project) {
-    emit('close')
+  if (event.key === 'Escape') {
+    if (isPreviewOpen.value) {
+      closePreview()
+      return
+    }
+
+    if (props.project) {
+      emit('close')
+    }
+  }
+
+  if (isPreviewOpen.value && event.key === 'ArrowLeft') {
+    showPrevImage()
+  }
+
+  if (isPreviewOpen.value && event.key === 'ArrowRight') {
+    showNextImage()
   }
 }
 
@@ -203,6 +281,35 @@ const validScreenshots = computed(() => props.project?.screenshots.filter(Boolea
 const currentImage = computed(
   () => validScreenshots.value[activeImage.value] ?? validScreenshots.value[0] ?? ''
 )
+const canNavigate = computed(() => validScreenshots.value.length > 1)
+
+const openPreview = () => {
+  if (currentImage.value) {
+    isPreviewOpen.value = true
+  }
+}
+
+const closePreview = () => {
+  isPreviewOpen.value = false
+}
+
+const showPrevImage = () => {
+  if (!validScreenshots.value.length) {
+    return
+  }
+
+  activeImage.value =
+    activeImage.value === 0 ? validScreenshots.value.length - 1 : activeImage.value - 1
+}
+
+const showNextImage = () => {
+  if (!validScreenshots.value.length) {
+    return
+  }
+
+  activeImage.value =
+    activeImage.value === validScreenshots.value.length - 1 ? 0 : activeImage.value + 1
+}
 
 const categoryLabel = computed(() => {
   switch (props.project?.category) {
@@ -268,9 +375,7 @@ const metricEntries = computed(() => {
   overflow: auto;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-2xl);
-  background:
-    radial-gradient(circle at top right, rgba(6, 182, 212, 0.12), transparent 32%),
-    var(--color-primary);
+  background: var(--gradient-surface-panel);
   box-shadow: var(--shadow-2xl);
 }
 
@@ -285,7 +390,12 @@ const metricEntries = computed(() => {
 .project-detail-title-wrap {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
+}
+
+.project-detail-badge {
+  align-self: flex-start;
 }
 
 .project-detail-title {
@@ -328,6 +438,16 @@ const metricEntries = computed(() => {
   gap: 16px;
 }
 
+.project-detail-preview-trigger {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
 .project-detail-cover,
 .project-detail-placeholder {
   width: 100%;
@@ -335,11 +455,16 @@ const metricEntries = computed(() => {
   border-radius: var(--radius-xl);
   overflow: hidden;
   border: 1px solid var(--color-border);
-  background: rgba(148, 163, 184, 0.08);
+  background: var(--color-surface-inset);
 }
 
 .project-detail-cover {
   object-fit: cover;
+  transition: transform var(--duration-normal) var(--ease-in-out);
+}
+
+.project-detail-preview-trigger:hover .project-detail-cover {
+  transform: scale(1.02);
 }
 
 .project-detail-placeholder {
@@ -347,6 +472,38 @@ const metricEntries = computed(() => {
   align-items: center;
   justify-content: center;
   color: var(--color-text-muted);
+}
+
+.project-detail-preview-hint,
+.project-detail-image-count {
+  position: absolute;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(2, 6, 23, 0.6);
+  color: #f8fafc;
+  font-size: var(--font-size-xs);
+  backdrop-filter: blur(10px);
+}
+
+.project-detail-preview-hint {
+  left: 16px;
+  bottom: 16px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+.project-detail-preview-trigger:hover .project-detail-preview-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-detail-image-count {
+  top: 16px;
+  right: 16px;
 }
 
 .project-detail-thumbs {
@@ -393,7 +550,7 @@ const metricEntries = computed(() => {
   gap: 8px;
   padding: 16px;
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.5);
+  background: var(--color-surface-soft);
   border: 1px solid var(--color-border);
 }
 
@@ -447,7 +604,7 @@ const metricEntries = computed(() => {
 .challenge-item {
   padding: 18px;
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.42);
+  background: var(--color-surface-soft);
   border: 1px solid var(--color-border);
 }
 
@@ -474,7 +631,7 @@ const metricEntries = computed(() => {
   gap: 6px;
   padding: 16px;
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.42);
+  background: var(--color-surface-soft);
   border: 1px solid var(--color-border);
 }
 
@@ -486,6 +643,89 @@ const metricEntries = computed(() => {
 .metric-value {
   color: var(--color-accent);
   font-weight: var(--font-weight-bold);
+}
+
+.project-image-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-modal) + 10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(2, 6, 23, 0.9);
+  backdrop-filter: blur(16px);
+}
+
+.project-image-viewer-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(1120px, 100%);
+  max-height: 100%;
+}
+
+.project-image-viewer-image {
+  width: 100%;
+  max-height: calc(100vh - 150px);
+  object-fit: contain;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-2xl);
+}
+
+.project-image-viewer-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  color: #e2e8f0;
+  font-size: var(--font-size-sm);
+}
+
+.project-image-viewer-caption strong {
+  color: #f8fafc;
+}
+
+.project-image-viewer-close,
+.project-image-viewer-nav {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(15, 23, 42, 0.64);
+  color: #f8fafc;
+  font-size: 1.8rem;
+  backdrop-filter: blur(10px);
+  transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+.project-image-viewer-close:hover,
+.project-image-viewer-nav:hover {
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(15, 23, 42, 0.84);
+}
+
+.project-image-viewer-close {
+  top: 24px;
+  right: 24px;
+}
+
+.project-image-viewer-nav {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.project-image-viewer-nav.prev {
+  left: 24px;
+}
+
+.project-image-viewer-nav.next {
+  right: 24px;
 }
 
 @media (max-width: 960px) {
@@ -510,6 +750,38 @@ const metricEntries = computed(() => {
 
   .project-detail-thumbs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-image-viewer {
+    padding: 16px;
+  }
+
+  .project-image-viewer-stage {
+    gap: 12px;
+  }
+
+  .project-image-viewer-caption {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project-image-viewer-close {
+    top: 16px;
+    right: 16px;
+  }
+
+  .project-image-viewer-nav {
+    width: 42px;
+    height: 42px;
+    font-size: 1.5rem;
+  }
+
+  .project-image-viewer-nav.prev {
+    left: 12px;
+  }
+
+  .project-image-viewer-nav.next {
+    right: 12px;
   }
 }
 </style>

@@ -47,19 +47,19 @@ const handleClick = (event: MouseEvent) => {
   display: flex;
   flex-direction: column;
   border-radius: var(--radius-xl);
-  background: var(--color-primary);
+  background: var(--color-surface);
   transition: all var(--duration-normal) var(--ease-in-out);
 }
 
 /* Variant: Default */
 .card-default {
-  background: var(--color-primary);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
 }
 
 /* Variant: Elevated */
 .card-elevated {
-  background: var(--color-primary);
+  background: var(--color-surface-strong);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
 }

@@ -12,14 +12,13 @@
     </section>
 
     <section class="contact-section">
-      <div class="container-custom contact-grid">
+      <div class="container-custom contact-grid single-column">
         <ContactCard
           :phone="profile.contact.phone"
           :email="profile.contact.email"
           :github="profile.contact.github"
           :location="profile.jobExpectations.cities.join(' / ')"
         />
-        <ContactForm />
       </div>
     </section>
 
@@ -68,7 +67,6 @@
 import { Card } from '@/components/ui'
 import SectionTitle from '@/components/common/SectionTitle.vue'
 import ContactCard from '@/components/common/ContactCard.vue'
-import ContactForm from '@/components/common/ContactForm.vue'
 import profile from '@/assets/data/profile'
 </script>
 
@@ -127,7 +125,7 @@ import profile from '@/assets/data/profile'
   padding: 16px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.32);
+  background: var(--color-surface-soft);
 }
 
 .status-item span {
@@ -145,9 +143,14 @@ import profile from '@/assets/data/profile'
   padding: 16px 18px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  background: rgba(15, 23, 42, 0.32);
+  background: var(--color-surface-soft);
   color: var(--color-text);
   transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+.single-column {
+  grid-template-columns: 1fr;
+  max-width: 820px;
 }
 
 .quick-link:hover {

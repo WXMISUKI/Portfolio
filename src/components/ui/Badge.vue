@@ -32,8 +32,12 @@ const badgeClasses = computed(() => [
 <style scoped>
 .badge {
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: max-content;
   padding: 2px 8px;
   border-radius: 9999px;
   font-family: var(--font-sans);

@@ -129,8 +129,8 @@ const timelineItems = computed(() =>
   padding: 36px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-2xl);
-  background:
-    linear-gradient(160deg, rgba(6, 182, 212, 0.08), transparent 44%), rgba(15, 23, 42, 0.56);
+  background: var(--gradient-surface-panel);
+  box-shadow: var(--shadow-lg);
 }
 
 .about-kicker {
@@ -188,7 +188,7 @@ const timelineItems = computed(() =>
   padding: 16px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  background: rgba(15, 23, 42, 0.35);
+  background: var(--color-surface-soft);
 }
 
 .summary-block span,
@@ -220,7 +220,7 @@ const timelineItems = computed(() =>
   padding: 18px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  background: rgba(15, 23, 42, 0.35);
+  background: var(--color-surface-soft);
 }
 
 @media (max-width: 1024px) {

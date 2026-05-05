@@ -12,6 +12,11 @@
   --color-text-muted: #64748b;
   --color-border: #1e293b;
   --color-border-hover: #334155;
+  --color-surface: rgba(15, 23, 42, 0.72);
+  --color-surface-strong: rgba(15, 23, 42, 0.82);
+  --color-surface-muted: rgba(15, 23, 42, 0.48);
+  --color-surface-soft: rgba(15, 23, 42, 0.34);
+  --color-surface-inset: rgba(148, 163, 184, 0.08);
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
@@ -24,6 +29,10 @@
   /* 渐变 - 深色主题 */
   --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
   --gradient-accent-hover: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+  --gradient-surface-hero:
+    linear-gradient(150deg, rgba(6, 182, 212, 0.14), transparent 44%), var(--color-surface);
+  --gradient-surface-panel:
+    linear-gradient(160deg, rgba(6, 182, 212, 0.1), transparent 48%), var(--color-surface);
 
   /* ==================== 间距系统 ==================== */
   --spacing-xs: 0.25rem; /* 4px */
@@ -84,6 +93,7 @@
   --shadow-md-light: 0 4px 6px -1px rgb(0 0 0 / 0.07);
   --shadow-lg-light: 0 10px 15px -3px rgb(0 0 0 / 0.1);
   --shadow-accent-light: 0 4px 12px rgb(99 102 241 / 0.15);
+  --shadow-panel-light: 0 24px 60px rgb(15 23 42 / 0.08);
 
   /* ==================== 过渡系统 ==================== */
   --duration-fast: 150ms;
@@ -120,6 +130,11 @@
   --color-text-muted: #9ca3af;
   --color-border: #e5e7eb;
   --color-border-hover: #d1d5db;
+  --color-surface: rgba(255, 255, 255, 0.82);
+  --color-surface-strong: rgba(255, 255, 255, 0.94);
+  --color-surface-muted: rgba(255, 255, 255, 0.72);
+  --color-surface-soft: rgba(248, 250, 252, 0.88);
+  --color-surface-inset: rgba(148, 163, 184, 0.12);
 
   /* 底部背景色 - 浅色主题 */
   --color-footer-bg: #ffffff;
@@ -128,10 +143,17 @@
   /* 渐变 - 浅色主题（科技感） */
   --gradient-accent: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
   --gradient-accent-hover: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+  --gradient-surface-hero:
+    linear-gradient(150deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.05) 52%, transparent),
+    var(--color-surface-strong);
+  --gradient-surface-panel:
+    linear-gradient(160deg, rgba(99, 102, 241, 0.08), rgba(6, 182, 212, 0.04) 56%, transparent),
+    var(--color-surface);
 
   /* 覆盖阴影系统 */
   --shadow-sm: var(--shadow-sm-light);
   --shadow-md: var(--shadow-md-light);
   --shadow-lg: var(--shadow-lg-light);
   --shadow-accent: var(--shadow-accent-light);
+  --shadow-2xl: var(--shadow-panel-light);
 }

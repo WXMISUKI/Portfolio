@@ -140,7 +140,7 @@ const getProjectNames = (projectIds?: string[]) => {
   padding: 16px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  background: rgba(15, 23, 42, 0.3);
+  background: var(--color-surface-soft);
 }
 
 .skill-meta {

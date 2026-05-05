@@ -1,6 +1,11 @@
 import type { Project } from '@/types/project'
 
-const asset = (path: string) => new URL(path, import.meta.url).href
+const imageModules = import.meta.glob('../images/projects/**/*.{jpg,jpeg,png,webp,avif}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+
+const asset = (path: string) => imageModules[`../images/projects/${path}`] ?? ''
 
 const projectDemos: Partial<Record<string, string>> = {
   p005: 'https://my-private-agent.vercel.app/',
@@ -68,10 +73,10 @@ export const projects: Project[] = [
       improvement: '首屏加载优化95%',
     },
     screenshots: [
-      asset('../images/projects/p001/map-monitor.jpg'),
-      asset('../images/projects/p001/warning-panel.jpg'),
-      asset('../images/projects/p001/video-monitor.jpg'),
-      asset('../images/projects/p001/vessel-list.jpg'),
+      asset('p001/map-monitor.jpg'),
+      asset('p001/warning-panel.jpg'),
+      asset('p001/video-monitor.jpg'),
+      asset('p001/vessel-list.jpg'),
     ],
     detailedDescription:
       '该项目是一个基于GIS的海底管道监控预警系统,主要功能包括船舶实时监控、三级预警、电子围栏、VHF广播等。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了大规模船舶数据的实时渲染和监控。',
@@ -136,10 +141,10 @@ export const projects: Project[] = [
       improvement: '数据统计效率提升80%',
     },
     screenshots: [
-      asset('../images/projects/p002/monitor-dashboard.jpg'),
-      asset('../images/projects/p002/warning-list.jpg'),
-      asset('../images/projects/p002/video-window.jpg'),
-      asset('../images/projects/p002/report-export.jpg'),
+      asset('p002/monitor-dashboard.jpg'),
+      asset('p002/warning-list.jpg'),
+      asset('p002/video-window.jpg'),
+      asset('p002/report-export.jpg'),
     ],
     detailedDescription:
       '舟山大桥综合管理指挥平台是一个集大桥监控、预警管理、应急指挥、视频监控于一体的综合管理系统。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了大桥的全方位监控和管理。',
@@ -203,9 +208,9 @@ export const projects: Project[] = [
       improvement: '首屏加载优化88%',
     },
     screenshots: [
-      asset('../images/projects/p003/main-monitor.jpg'),
-      asset('../images/projects/p003/video-window.jpg'),
-      asset('../images/projects/p003/warning-list.jpg'),
+      asset('p003/main-monitor.jpg'),
+      asset('p003/video-window.jpg'),
+      asset('p003/warning-list.jpg'),
     ],
     detailedDescription:
       '嘉兴公安海防反走私系统是一个基于GIS的海防监控预警系统,主要功能包括船舶监控、电子围栏、预警规则、地图工具等。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了万级点位的高性能渲染。',
@@ -268,10 +273,10 @@ export const projects: Project[] = [
       improvement: '监控效率提升60%',
     },
     screenshots: [
-      asset('../images/projects/p004/dashboard.jpg'),
-      asset('../images/projects/p004/ai-assistant.jpg'),
-      asset('../images/projects/p004/weather-chart.jpg'),
-      asset('../images/projects/p004/vessel-search.jpg'),
+      asset('p004/dashboard.jpg'),
+      asset('p004/ai-assistant.jpg'),
+      asset('p004/weather-chart.jpg'),
+      asset('p004/vessel-search.jpg'),
     ],
     detailedDescription:
       '远洋渔业智能驾驶舱是一个集GIS地图、船舶监控、天气预警、AI智能助手于一体的综合监控系统。项目使用Vue3+TypeScript+OpenLayers技术栈,实现了智能化的渔业监控和管理。',
@@ -334,10 +339,10 @@ export const projects: Project[] = [
       localModels: '支持5+种本地模型',
     },
     screenshots: [
-      asset('../images/projects/p005/chat-main.jpg'),
-      asset('../images/projects/p005/model-settings.jpg'),
-      asset('../images/projects/p005/plugin-center.jpg'),
-      asset('../images/projects/p005/session-list.jpg'),
+      asset('p005/chat-main.jpg'),
+      asset('p005/model-settings.jpg'),
+      asset('p005/plugin-center.jpg'),
+      asset('p005/session-list.jpg'),
     ],
     demo: projectDemos.p005,
     repo: projectRepos.p005,
@@ -403,10 +408,10 @@ export const projects: Project[] = [
       improvement: '意图识别准确率90%+',
     },
     screenshots: [
-      asset('../images/projects/p006/agent-interface.jpg'),
-      asset('../images/projects/p006/plan-result.jpg'),
-      asset('../images/projects/p006/workflow-desc.jpg'),
-      asset('../images/projects/p006/api-doc.jpg'),
+      asset('p006/agent-interface.jpg'),
+      asset('p006/plan-result.jpg'),
+      asset('p006/workflow-desc.jpg'),
+      asset('p006/api-doc.jpg'),
     ],
     demo: projectDemos.p006,
     repo: projectRepos.p006,
@@ -470,10 +475,10 @@ export const projects: Project[] = [
       improvement: '对话准确率85%+',
     },
     screenshots: [
-      asset('../images/projects/p007/chat-demo.jpg'),
-      asset('../images/projects/p007/recommend-page.jpg'),
-      asset('../images/projects/p007/ranking-page.jpg'),
-      asset('../images/projects/p007/multi-round-chat.jpg'),
+      asset('p007/chat-demo.jpg'),
+      asset('p007/recommend-page.jpg'),
+      asset('p007/ranking-page.jpg'),
+      asset('p007/multi-round-chat.jpg'),
     ],
     demo: projectDemos.p007,
     repo: projectRepos.p007,
@@ -537,10 +542,7 @@ export const projects: Project[] = [
       commits: '40+',
       improvement: 'TTS质量高',
     },
-    screenshots: [
-      asset('../images/projects/p008/tts-interface.jpg'),
-      asset('../images/projects/p008/api-call.jpg'),
-    ],
+    screenshots: [asset('p008/tts-interface.jpg'), asset('p008/api-call.jpg')],
     repo: projectRepos.p008,
     detailedDescription:
       'TTS Pro是一个企业级语音合成服务,实现零样本音色克隆、高质量TTS、服务化部署等功能。项目使用Python+Flask+CosyVoice3技术栈,实现了完整的语音合成解决方案。',

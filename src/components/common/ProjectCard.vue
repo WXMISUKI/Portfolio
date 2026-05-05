@@ -107,7 +107,7 @@ const emit = defineEmits<{
   viewDetails: [project: Project]
 }>()
 
-const coverImage = computed(() => props.project.screenshots[0] ?? '')
+const coverImage = computed(() => props.project.screenshots.find(Boolean) ?? '')
 
 const getCategoryName = (category: string) => {
   const map: Record<string, string> = {

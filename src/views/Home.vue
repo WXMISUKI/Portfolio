@@ -127,7 +127,7 @@ import { useProjectStore } from '@/store'
 
 const projectStore = useProjectStore()
 const heroTags = ['政企项目', 'GIS', '视频流', '性能优化', 'AI 智能体', '全栈开发']
-const words = ['前端工程专家', 'AI 全栈开发者', '智能体开发工程师']
+const words = ['前端工程师', 'AI 全栈开发者', '智能体开发工程师']
 
 const wordIndex = ref(0)
 const typedWords = computed(() => words[wordIndex.value])
@@ -188,9 +188,9 @@ onUnmounted(() => {
   padding: 40px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-2xl);
-  background:
-    linear-gradient(150deg, rgba(6, 182, 212, 0.12), transparent 42%), rgba(15, 23, 42, 0.6);
+  background: var(--gradient-surface-hero);
   backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-2xl);
 }
 
 .hero-kicker {
@@ -289,7 +289,7 @@ onUnmounted(() => {
   padding: 24px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-2xl);
-  background: rgba(15, 23, 42, 0.46);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
 }
 
